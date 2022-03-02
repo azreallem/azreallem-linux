@@ -1,8 +1,9 @@
 # azreallem-vim
 ## config file
-.vimrc
-.zshrc
+- .vimrc
+- .zshrc
 
 ## help file
-vim-help
-tmux
+- vim
+- tmux
+- gdb
