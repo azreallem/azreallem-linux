@@ -1,13 +1,19 @@
 # terminal mode
 ## vim打开多窗口、多文件
-vim file1 file2 ...
-vim -On file1 file2 ... # 垂直打开
-vim -on file1 file2 ... # 水平打开
+```bash
+vim file1 file2
+vim -On file1 file2	# 垂直打开
+vim -on file1 file2	# 水平打开
+vimdiff file1 file2
+```
 
 ## only read mode 
+```
 view file1
+```
 
 # insert mode
+```
 :e file2		# 当前窗口打开
 :sp file2 		# 水平切分窗口
 :vsp file2 		# 垂直切分窗口
@@ -15,8 +21,10 @@ view file1
 Ctrl + 6		# switch file1,file2
 :ls			# list open files
 :bn			# switch file-n
+```
 
 ## tabe相关
+```
 :tabe file...		# new table file...
 g t			# goto next tab
 g T			# goto prev tab
@@ -26,12 +34,16 @@ g T			# goto prev tab
 
 :vert diffsplit file2	# 比较两个文件不同
 :5,15s/dog/cat/g	# 替换行内字符串
+```
 
 ## 设置空格或回车可见
+```
 :setlocal list
 :set listchars=tab:>~,trail:.
+```
 
 # normal mode
+```
 r 			# 单个字符替换
 R 			# 替换模式
 V			# 行 视图模式
@@ -57,8 +69,10 @@ gD			# 跳到局部变量的定义处
 <C-a>			# add 1
 <C-x>			# sub 1
 <C-r>			# 撤销回退
+```
 
 ## 折叠相关
+```
 z f %			# 折叠
 z o			# 展开
 z c			# 折叠
@@ -67,11 +81,12 @@ z c			# 折叠
 <C-w> v     		# 垂直新建窗口
 <C-g>			# 显示文件信息
 <C-o>			# 回到上次打开的文件
-
+```
 
 
 ## plugins
 ### vim-markdown
+```
 zr: reduces fold level throughout the buffer
 zR: opens all folds
 zm: increases fold level throughout the buffer
@@ -80,10 +95,5 @@ za: open a fold your cursor is on
 zA: open a fold your cursor is on recursively
 zc: close a fold your cursor is on
 zC: close a fold your cursor is on recursively
-
-
-# gdb
 ```
-<C-L>			# clear screen
-(gdb) p /x *p@100	# print array of length
-```
+

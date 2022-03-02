@@ -1,4 +1,4 @@
-### session操作
+## session操作
 ```bash
 tmux new　　			# 创建默认名称的会话
 tmux new -s mysession		# 创建名为mysession的会话
@@ -12,7 +12,7 @@ tmux kill-session -a -t s1	# 关闭除s1外的所有会话
 tmux kill-server		# 关闭所有会话
 ```
 
-### window操作
+## window操作
 ```
 prefix c	# 创建一个新窗口
 prefix ,	# 重命名当前窗口
@@ -27,7 +27,7 @@ prefix s	# 列出窗口
 ctrl + d	# 关闭当前窗口
 ```
 
-### 窗格管理
+## 窗格管理
 ```
 prefix %			# 水平方向创建窗格
 prefix "			# 垂直方向创建窗格
@@ -45,10 +45,10 @@ prefix z　　			# 放大当前窗格(再次按下将还原)
 prefix i　　			# 显示当前窗格信息
 ```
 
-### down-cmd
+## down-cmd
 :move-pane -t 0:1	# 移动窗格到session0:1
 
-### 常用方法
+## 常用方法
 - `prefix %`：划分左右两个窗格。
 - `prefix "`：划分上下两个窗格。
 - `prefix ->`：光标切换到其他窗格。
@@ -56,10 +56,11 @@ prefix i　　			# 显示当前窗格信息
 - `prefix space`：重新排列当前窗口下的所有窗格`
 
 ```bash
-tmux ls
+tmux ls	
 tmux a -t "name"
 tmux kill-session "name"
 ```
 
-<C-s> 搜索
-gg 跳转
+```
+prefix x	# 杀死窗格
+```
