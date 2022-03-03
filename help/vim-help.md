@@ -8,12 +8,12 @@ vimdiff file1 file2
 ```
 
 ## only read mode 
-```
+```bash
 view file1
 ```
 
 # insert mode
-```
+```bash
 :e file2		# 当前窗口打开
 :sp file2 		# 水平切分窗口
 :vsp file2 		# 垂直切分窗口
@@ -24,7 +24,7 @@ Ctrl + 6		# switch file1,file2
 ```
 
 ## tabe相关
-```
+```bash
 :tabe file...		# new table file...
 g t			# goto next tab
 g T			# goto prev tab
@@ -37,13 +37,13 @@ g T			# goto prev tab
 ```
 
 ## 设置空格或回车可见
-```
+```bash
 :setlocal list
 :set listchars=tab:>~,trail:.
 ```
 
 # normal mode
-```
+```bash
 r 			# 单个字符替换
 R 			# 替换模式
 V			# 行 视图模式
@@ -53,14 +53,17 @@ b			# 移到单词开头
 %			# 跳到括号匹配处
 
 <C-e> / <C-y>		# 屏幕向下(上)移动一行
-zz			# 将当前行移动到屏幕的中间
+z			# 将当前行移动到屏幕的中间
 zt 			# 将当前行移到屏幕顶部
 zb 			# 将当前行移到屏幕底部
 ZZ			# 保存并退出
 gf			# 打开头文件
 gD			# 跳到局部变量的定义处
-[[ 			# 跳转至上一个函数(要求代码块中'{'必须单独占一行)
-]] 			# 跳转至下一个函数(要求代码块中'{'必须单独占一行)
+[[ 			# 跳转至上一个函数
+]] 			# 跳转至下一个函数
+x			# delete char
+dw			# delete word
+dd			# delete line
 
 
 <C-w-w>			# switch window
@@ -72,7 +75,7 @@ gD			# 跳到局部变量的定义处
 ```
 
 ## 折叠相关
-```
+```bash
 z f %			# 折叠
 z o			# 展开
 z c			# 折叠
@@ -86,7 +89,7 @@ z c			# 折叠
 
 ## plugins
 ### vim-markdown
-```
+```bash
 zr: reduces fold level throughout the buffer
 zR: opens all folds
 zm: increases fold level throughout the buffer
@@ -96,4 +99,3 @@ zA: open a fold your cursor is on recursively
 zc: close a fold your cursor is on
 zC: close a fold your cursor is on recursively
 ```
-
