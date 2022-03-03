@@ -18,13 +18,10 @@ view file1
 :sp file2 		# 水平切分窗口
 :vsp file2 		# 垂直切分窗口
 
-Ctrl + 6		# switch file1,file2
 :ls			# list open files
 :bn			# switch file-n
-```
 
-## tabe相关
-```bash
+# tabe相关
 :tabe file...		# new table file...
 g t			# goto next tab
 g T			# goto prev tab
@@ -64,7 +61,8 @@ gD			# 跳到局部变量的定义处
 x			# delete char
 dw			# delete word
 dd			# delete line
-
+~			# 大小写转换
+u			# 撤销
 
 <C-w-w>			# switch window
 <C-w-r>			# swap window
@@ -72,6 +70,8 @@ dd			# delete line
 <C-a>			# add 1
 <C-x>			# sub 1
 <C-r>			# 撤销回退
+
+<C-n>			# 代码补全
 ```
 
 ## 折叠相关
