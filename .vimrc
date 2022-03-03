@@ -39,4 +39,3 @@ let g:vim_markdown_folding_disabled = 1
 
 " mapping
 map <C-h> :browse oldfiles<CR>
-inoremap <C-o> <Esc>o
