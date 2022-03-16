@@ -102,3 +102,5 @@ source $ZSH/oh-my-zsh.sh
 
 setopt no_share_history
 setopt no_nomatch
+
+export ALL_PROXY=http://127.0.0.1:1081
