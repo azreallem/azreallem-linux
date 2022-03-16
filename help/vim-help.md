@@ -30,7 +30,9 @@ g T			# goto prev tab
 :w ! sudo tee %		# 强制保存
 
 :vert diffsplit file2	# 比较两个文件不同
+
 :5,15s/dog/cat/g	# 替换行内字符串
+:%s/dog/cat/g
 ```
 
 ## 设置空格或回车可见
@@ -61,6 +63,7 @@ gD			# 跳到局部变量的定义处
 x			# delete char
 dw			# delete word
 dd			# delete line
+DD			# delete last chars of line
 ~			# 大小写转换
 u			# 撤销
 
