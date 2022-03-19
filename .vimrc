@@ -39,3 +39,24 @@ let g:vim_markdown_folding_disabled = 1
 
 " mapping
 map <C-h> :browse oldfiles<CR>
+
+" Shortcuts to move between tabs with Ctrl+Shift+Left/Right
+function TabLeft()
+   if tabpagenr() == 1
+      execute "tabm"
+   else
+      execute "tabm -1"
+   endif
+endfunction
+
+function TabRight()
+   if tabpagenr() == tabpagenr('$')
+      execute "tabm" 0
+   else
+      execute "tabm +1"
+   endif
+endfunction
+
+map <silent><C-j> :execute TabRight()<CR>
+map <silent><C-k> :execute TabLeft()<CR>
+
