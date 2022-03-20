@@ -1,5 +1,4 @@
-# terminal mode
-## vim打开多窗口、多文件
+# terminal mode ## vim打开多窗口、多文件
 ```bash
 vim file1 file2
 vim -On file1 file2	# 垂直打开
@@ -23,8 +22,6 @@ view file1
 
 # tabe相关
 :tabe file...		# new table file...
-g t			# goto next tab
-g T			# goto prev tab
 
 :verbose set mouse	# 查看最后在哪里配置的mouse
 :w ! sudo tee %		# 强制保存
@@ -51,29 +48,31 @@ b			# 移到单词开头
 ''			# 光标回到上一次的位置
 %			# 跳到括号匹配处
 
-<C-e> / <C-y>		# 屏幕向下(上)移动一行
 z			# 将当前行移动到屏幕的中间
 zt 			# 将当前行移到屏幕顶部
 zb 			# 将当前行移到屏幕底部
 ZZ			# 保存并退出
 gf			# 打开头文件
-gD			# 跳到局部变量的定义处
+gt			# goto next tab
+gT			# goto prev tab
 [[ 			# 跳转至上一个函数
 ]] 			# 跳转至下一个函数
 x			# delete char
 dw			# delete word
 dd			# delete line
-DD			# delete last chars of line
+D			# 删除光标之后的字符串
+d0			# 删除光标之前的字符串
 ~			# 大小写转换
 u			# 撤销
 
+
+<C-e> / <C-y>		# 屏幕向下(上)移动一行
 <C-w-w>			# switch window
 <C-w-r>			# swap window
 
 <C-a>			# add 1
 <C-x>			# sub 1
 <C-r>			# 撤销回退
-
 <C-n>			# 代码补全
 ```
 
