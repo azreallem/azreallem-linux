@@ -7,6 +7,7 @@ Plugin 'VundleVim/Vundle.vim'
 " https://github.com/plasticboy/vim-markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'dense-analysis/ale'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -29,18 +30,18 @@ set hlsearch
 set autoindent
 
 " theme
-set background=dark
+" set background=dark
 
 " others
 set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
 
-" vim_markdown
+" vim_markdown Plugin
 let g:vim_markdown_folding_disabled = 1
 
 " mapping
 map <C-h> :browse oldfiles<CR>
 
-" Shortcuts to move between tabs with Ctrl+Shift+Left/Right
+" Shortcuts to move between tabs with Ctrl+h/j
 function TabLeft()
    if tabpagenr() == 1
       execute "tabm"
@@ -59,4 +60,5 @@ endfunction
 
 map <silent><C-j> :execute TabRight()<CR>
 map <silent><C-k> :execute TabLeft()<CR>
-
+" ale Plugin
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
