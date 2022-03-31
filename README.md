@@ -1,6 +1,6 @@
 # azreallem-vim
-configure files
-├── .tmux.conf
-├── .vimrc
-└── .zshrc
+configure files  
+├── .tmux.conf  
+├── .vimrc  
+└── .zshrc  
 
