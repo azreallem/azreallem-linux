@@ -62,3 +62,13 @@ map <silent><C-j> :execute TabRight()<CR>
 map <silent><C-k> :execute TabLeft()<CR>
 " ale Plugin
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
+" 文件内容发生变化时不进行检查
+" let g:ale_lint_on_text_changed = 'never'
+" " " 打开文件时不进行检查
+" let g:ale_lint_on_enter = 0
+let g:ale_linters = {
+\   'c++': ['g++'],
+\   'c': ['gcc'],
+\   'python': ['pylint'],
+\}
+
