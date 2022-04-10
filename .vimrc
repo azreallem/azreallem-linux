@@ -23,6 +23,8 @@ syntax on
 " set laststatus=2
 set mouse=r
 " set paste
+set relativenumber
+
 
 " enable hightlight search
 set hlsearch
@@ -72,3 +74,5 @@ let g:ale_linters = {
 \   'python': ['pylint'],
 \}
 
+map <F1> :ALEDisable<CR>:set norelativenumber<CR>
+map <F2> :ALEEnable<CR>:set relativenumber<CR>
