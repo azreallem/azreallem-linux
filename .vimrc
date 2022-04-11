@@ -23,7 +23,6 @@ syntax on
 " set laststatus=2
 set mouse=r
 " set paste
-set relativenumber
 
 
 " enable hightlight search
@@ -33,6 +32,7 @@ set autoindent
 
 " theme
 " set background=dark
+
 
 " others
 set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
@@ -74,5 +74,6 @@ let g:ale_linters = {
 \   'python': ['pylint'],
 \}
 
-map <F1> :ALEDisable<CR>:set norelativenumber<CR>
-map <F2> :ALEEnable<CR>:set relativenumber<CR>
+set norelativenumber
+map <silent><F3> :ALEEnable<CR>:set relativenumber<CR>
+map <silent><F4> :ALEDisable<CR>:set norelativenumber<CR>
