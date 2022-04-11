@@ -41,7 +41,7 @@ set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
 let g:vim_markdown_folding_disabled = 1
 
 " mapping
-map <C-h> :browse oldfiles<CR>
+" map <C-h> :browse oldfiles<CR>
 
 " Shortcuts to move between tabs with Ctrl+h/j
 function TabLeft()
@@ -75,5 +75,5 @@ let g:ale_linters = {
 \}
 
 set norelativenumber
-map <silent><F3> :ALEEnable<CR>:set relativenumber<CR>
+map <silent><F3> :ALEToggle<CR>:set relativenumber<CR>
 map <silent><F4> :ALEDisable<CR>:set norelativenumber<CR>
