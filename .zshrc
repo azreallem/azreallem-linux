@@ -101,7 +101,22 @@ setopt no_share_history
 setopt no_nomatch
 
 
-export ALL_PROXY=http://127.0.0.1:1081
 
 alias rm="trash-put"
 alias cp="cp -i"
+alias pdf="evince"
+
+function title()
+{
+    if [ $# -eq 0 ]
+        then
+        eval set -- "\\u@\\h: \\w"
+    fi
+
+    case $TERM in
+        xterm*) local title="\[\033]0;$@\007\]";;
+        *) local title=''
+    esac
+    local prompt=$(echo "$PS1" | sed -e 's/\\\[\\033\]0;.*\\007\\\]//')
+    PS1="${title}${prompt}"
+}

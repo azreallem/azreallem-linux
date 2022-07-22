@@ -29,6 +29,7 @@ set mouse=r
 set hlsearch
 " set cursorline
 set autoindent
+set nu
 
 " theme
 " set background=dark
@@ -62,18 +63,41 @@ endfunction
 
 map <silent><C-k> :execute TabRight()<CR>
 map <silent><C-j> :execute TabLeft()<CR>
+
 " ale Plugin
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
-" 文件内容发生变化时不进行检查
-let g:ale_lint_on_text_changed = 'never'
-" " " 打开文件时不进行检查
+" let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
 \   'c++': ['g++'],
 \   'c': ['gcc'],
 \   'python': ['pylint'],
 \}
+map <silent><F3> :ALEToggle<CR>:set nu<CR>
+map <silent><F4> :ALEDisable<CR>:set nonu<CR>
 
-set norelativenumber
-map <silent><F3> :ALEToggle<CR>:set relativenumber<CR>
-map <silent><F4> :ALEDisable<CR>:set norelativenumber<CR>
+" hi Over80 guifg=fg guibg=Blue
+" au BufNewFile,BufRead *.* match Over80 '\%>80v.*'
+" set colorcolumn=81
+" let &colorcolumn=join(range(1,80),",")."80,".join(range(81,9999),",")
+" set background=dark
+"
+
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=1
+    set cst 
+    set nocsverb
+    if filereadable("cscope.out")
+            cs add cscope.out
+    endif
+    set csverb
+endif
+
+:set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+nmap <C-_>s :cs find <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <F5> :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <F6> :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <F7> :cs find c <C-R>=expand("<cword>")<CR><CR>
+
