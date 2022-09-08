@@ -7,7 +7,7 @@ Plugin 'VundleVim/Vundle.vim'
 " https://github.com/plasticboy/vim-markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'dense-analysis/ale'
+Plugin 'jmcantrell/vim-diffchanges'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -41,6 +41,7 @@ set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
 " vim_markdown Plugin
 let g:vim_markdown_folding_disabled = 1
 
+
 " mapping
 " map <C-h> :browse oldfiles<CR>
 
@@ -65,16 +66,16 @@ map <silent><C-k> :execute TabRight()<CR>
 map <silent><C-j> :execute TabLeft()<CR>
 
 " ale Plugin
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-" let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {
-\   'c++': ['g++'],
-\   'c': ['gcc'],
-\   'python': ['pylint'],
-\}
-map <silent><F3> :ALEToggle<CR>:set nu<CR>
-map <silent><F4> :ALEDisable<CR>:set nonu<CR>
+"nmap <silent> <C-n> <Plug>(ale_next_wrap)
+"" let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_enter = 0
+"let g:ale_linters = {
+"\   'c++': ['g++'],
+"\   'c': ['gcc'],
+"\   'python': ['pylint'],
+"\}
+"map <silent><F3> :ALEToggle<CR>:set nu<CR>
+"map <silent><F4> :ALEDisable<CR>:set nonu<CR>
 
 " hi Over80 guifg=fg guibg=Blue
 " au BufNewFile,BufRead *.* match Over80 '\%>80v.*'
@@ -100,4 +101,25 @@ nmap <C-_>s :cs find <C-R>=expand("<cword>")<CR><CR>
 nmap <silent> <F5> :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <silent> <F6> :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <silent> <F7> :cs find c <C-R>=expand("<cword>")<CR><CR>
+ 
 
+function GitDiff()
+    :silent write
+    :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
+    :redraw!
+endfunction
+
+nnoremap <leader>gd :call GitDiff()<cr>
+
+" gitgutter plugin setting
+" let g:gitgutter_use_location_list =  0
+set updatetime=100
+"command! Gqf GitGutterQuickFix | copen
+nmap gj <Plug>(GitGutterNextHunk)
+nmap gk <Plug>(GitGutterPrevHunk)
+
+"function! GitStatus()
+"  let [a,m,r] = GitGutterGetHunkSummary()
+"  return printf('+%d ~%d -%d', a, m, r)
+"endfunction
+"set statusline+=%{GitStatus()}

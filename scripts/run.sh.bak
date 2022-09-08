@@ -1,0 +1,10 @@
+#!/bin/sh
+
+env -i \
+GSGPU_DEBUG_LEVEL=2 \
+MESA_LOADER_DRIVER_OVERRIDE=gsgpu \
+MESA_GL_VERSION_OVERRIDE=3.3 \
+LD_LIBRARY_PATH=/home/loongson/Workspace/build/lib:/home/loongson/Workspace/build/lib64 \
+LIBGL_DRIVERS_PATH=/home/loongson/Workspace/build/lib/dri \
+DISPLAY=:0.0 \
+gdb ${1}

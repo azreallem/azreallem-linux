@@ -2,7 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/gaoliang/.oh-my-zsh"
+export ZSH="/home/loongson/.oh-my-zsh"
+export PATH="/home/loongson/scripts:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will load a random
 # theme each time oh-my-zsh is loaded, in which case, to know which specific
@@ -102,9 +103,12 @@ setopt no_nomatch
 
 
 
-alias rm="trash-put"
+#alias rm="trash-put"
 alias cp="cp -i"
 alias pdf="evince"
+alias gg="grep -Inr --include=*.{cpp,c,h,inc,td}"
+alias ff="find . -name"
+alias ifconfig="/sbin/ifconfig"
 
 function title()
 {
