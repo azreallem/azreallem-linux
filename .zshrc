@@ -2,8 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/loongson/.oh-my-zsh"
-export PATH="/home/loongson/scripts:$PATH"
+export ZSH="$HOME/.oh-my-zsh"
+export PATH="$HOME/scripts:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will load a random
 # theme each time oh-my-zsh is loaded, in which case, to know which specific
@@ -124,3 +124,5 @@ function title()
     local prompt=$(echo "$PS1" | sed -e 's/\\\[\\033\]0;.*\\007\\\]//')
     PS1="${title}${prompt}"
 }
+
+. /usr/share/autojump/autojump.sh
