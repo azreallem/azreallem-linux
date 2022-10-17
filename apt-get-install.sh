@@ -2,7 +2,7 @@
 sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 sudo apt-get update
-sudo apt-get install aptitude zsh vim tmux autojump c c++ python3
+sudo apt-get install aptitude zsh vim tmux autojump gcc g++ python3 gdb
 
 
 if [ ! -e $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]

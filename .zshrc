@@ -125,4 +125,8 @@ function title()
     PS1="${title}${prompt}"
 }
 
+# win11-wsl proxy config
+host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ")
+export ALL_PROXY="http://$host_ip:10811"
+
 . /usr/share/autojump/autojump.sh

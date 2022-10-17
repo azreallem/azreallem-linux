@@ -2,5 +2,6 @@
 configure files  
 ├── .tmux.conf  
 ├── .vimrc  
-└── .zshrc  
+├── .zshrc  
+└── scripts  
 
