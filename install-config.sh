@@ -5,7 +5,7 @@ mkdir -p $dir
 cp $HOME/.tmux.conf $dir 2>/dev/null
 cp $HOME/.zshrc $dir 2>/dev/null
 cp $HOME/.vimrc $dir 2>/dev/null
-cp $HOME/scripts $dir 2>/dev/null
+cp -r $HOME/scripts $dir 2>/dev/null
 
 cp .tmux.conf $HOME
 cp .zshrc $HOME
