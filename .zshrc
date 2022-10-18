@@ -14,7 +14,6 @@ export PATH="$HOME/scripts:$PATH"
 #ZSH_THEME="peepcode"
 ZSH_THEME="geoffgarside"
 
-
 # Set list of themes to pick from when loading at random Setting this variable
 # when ZSH_THEME=random will cause zsh to load a theme from this variable
 # instead of looking in $ZSH/themes/ If set to an empty array, this variable
@@ -75,9 +74,9 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(zsh-syntax-highlighting)
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-# HISTSIZE=10000
-# SAVEHIST=10000
-# HISTFILE=~/.zsh_history
+HISTSIZE=999999
+SAVEHIST=999999
+HISTFILE=~/.zsh_history
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,15 +106,16 @@ setopt no_nomatch
 
 
 
+# -------------------------- alias --------------------------
 #alias rm="trash-put"
 alias cp="cp -i"
 alias pdf="evince"
-alias gg="grep -Iinr --include=*.{cpp,c,h,td}"
-alias ggn="grep -Iinr"
+alias gg="grep -Inr --include=*.{cpp,c,h,inc,td}"
 alias ff="find . -name"
 alias ifconfig="/sbin/ifconfig"
-. /usr/share/autojump/autojump.sh
 
+
+# -------------------------- others -------------------------
 function title()
 {
     if [ $# -eq 0 ]
@@ -130,3 +130,12 @@ function title()
     local prompt=$(echo "$PS1" | sed -e 's/\\\[\\033\]0;.*\\007\\\]//')
     PS1="${title}${prompt}"
 }
+
+. /usr/share/autojump/autojump.sh
+
+
+# --------------- win11-wsl2 proxy config -------------------
+if [ ! -z $(uname -r | grep -i "wsl") ] ; then
+    host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ")
+    export ALL_PROXY="http://$host_ip:10811"
+fi

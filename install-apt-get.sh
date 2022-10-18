@@ -14,6 +14,12 @@ if [ ! -e $HOME/.vim/bundle/Vundle.vim ]
 then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
-vim +PluginInstall +qall
 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo "=---------- vim install --------------="
+echo "Please waitting ......"
+vim +PluginInstall +qall &> /dev/null &
+echo "=---------- vim finished --------------="
+
+echo "Please waitting ......"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &> /dev/null
+echo "Install Finished."

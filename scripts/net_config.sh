@@ -1,3 +1,3 @@
 #!/bin/sh
 
-nohup python3 /home/loongson/acloong_request.null.py > /home/loongson/log/net_config.log 2>&1 &
+nohup python3 $HOME/acloong_request.null.py > $HOME/log/net_config.log 2>&1 &

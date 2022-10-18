@@ -1,7 +1,7 @@
 #!/bin/sh
+# Description: rm all .*.swp file;
 
-dir1=`pwd`
-find $dir1 -name ".*.swp" | while read line
+find $(pwd) -name ".*.swp" | while read line
 do
 	echo "rm $line"
 	rm $line

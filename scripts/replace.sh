@@ -1,7 +1,11 @@
 #!/bin/bash
-# =-----------------------------------------------------------------------------=
-# Please run in terminal about `replaces.sh STR REPLACE_STR [FILETYPE1 ...]`;
-# =-----------------------------------------------------------------------------=
+# -------------------------------------------
+# SYNOPSIS
+#        replace.sh OLD_STR NEW_STR [FILETYPE1 ...]
+# EXAMPLE
+#        replace.sh hello Hello
+#        replace.sh hello Hello c
+# -------------------------------------------
 
 if [ -z $3 ]
 then

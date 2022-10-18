@@ -7,10 +7,10 @@ cp $HOME/.zshrc $dir 2>/dev/null
 cp $HOME/.vimrc $dir 2>/dev/null
 cp $HOME/scripts $dir 2>/dev/null
 
-cp -i .tmux.conf $HOME
-cp -i .zshrc $HOME
-cp -i .vimrc $HOME
-cp -ir scripts $HOME
+cp .tmux.conf $HOME
+cp .zshrc $HOME
+cp .vimrc $HOME
+cp -r scripts $HOME
 
-source $HOME/.zshrc
-source $HOME/.vimrc
+source $HOME/.zshrc 2>/dev/null
+source $HOME/.vimrc 2>/dev/null

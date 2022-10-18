@@ -1,4 +1,15 @@
 #!/bin/sh
+# -------------------------------------------
+# SYNOPSIS
+#        vv.sh FILE:LINE
+#        vv.sh FILE
+# EXAMPLE
+#        vv.sh test.c:4
+#        vv.sh test.c
+# SAME AS
+#        vim test.c +4
+#        vim test.c
+# -------------------------------------------
 
 line_code=$1
 
