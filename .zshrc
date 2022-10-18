@@ -9,7 +9,11 @@ export PATH="$HOME/scripts:$PATH"
 # theme each time oh-my-zsh is loaded, in which case, to know which specific
 # one was loaded, run: echo $RANDOM_THEME See
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="ys"
+#ZSH_THEME="ys"
+#ZSH_THEME="random"
+#ZSH_THEME="peepcode"
+ZSH_THEME="geoffgarside"
+
 
 # Set list of themes to pick from when loading at random Setting this variable
 # when ZSH_THEME=random will cause zsh to load a theme from this variable
@@ -106,9 +110,11 @@ setopt no_nomatch
 #alias rm="trash-put"
 alias cp="cp -i"
 alias pdf="evince"
-alias gg="grep -Inr --include=*.{cpp,c,h,inc,td}"
+alias gg="grep -Iinr --include=*.{cpp,c,h,td}"
+alias ggn="grep -Iinr"
 alias ff="find . -name"
 alias ifconfig="/sbin/ifconfig"
+. /usr/share/autojump/autojump.sh
 
 function title()
 {
@@ -124,9 +130,3 @@ function title()
     local prompt=$(echo "$PS1" | sed -e 's/\\\[\\033\]0;.*\\007\\\]//')
     PS1="${title}${prompt}"
 }
-
-# win11-wsl proxy config
-host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ")
-export ALL_PROXY="http://$host_ip:10811"
-
-. /usr/share/autojump/autojump.sh

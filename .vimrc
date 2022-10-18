@@ -1,13 +1,13 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-" https://github.com/plasticboy/vim-markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jmcantrell/vim-diffchanges'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'antiagainst/vim-tablegen'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -32,11 +32,12 @@ set autoindent
 set nu
 
 " theme
-" set background=dark
 
 
 " others
+" set background=dark
 set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
+highlight LineNr term=bold cterm=NONE ctermfg=Grey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 " vim_markdown Plugin
 let g:vim_markdown_folding_disabled = 1
@@ -123,3 +124,9 @@ nmap gk <Plug>(GitGutterPrevHunk)
 "  return printf('+%d ~%d -%d', a, m, r)
 "endfunction
 "set statusline+=%{GitStatus()}
+
+" GitGutter
+autocmd BufWinEnter * execute 'GitGutterQuickFix'
+
+
+

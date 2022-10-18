@@ -1,14 +1,16 @@
 #!/bin/bash
-
-gg="$(grep -Inr --include=*.{cpp,c,h,td,inc} $1 ./)"
+gg=$(grep -Inr --color=auto --include=*.{cpp,c,h,td,inc} $1) 
 echo "$gg"
-read -p "Enter line(1-100, 0 is exit):" LINE
+
+read -p "Enter line(1-100, 0 is exit): " LINE
 if [ $LINE -ne 0 ]
 then
 	line_code="$(echo "$gg" | awk '{print $1}' | sed -n ""$LINE"p")"
 	echo $line_code
 	lf=${line_code%%:*}
+	echo $lf
 	line_code=${line_code#*:}
 	ll=${line_code%%:*}
+	echo $ll
 	vim  $lf +$ll
 fi
