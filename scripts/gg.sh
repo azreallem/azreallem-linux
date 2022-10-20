@@ -24,7 +24,7 @@ echo "=------------------------END-------------------------------="
 read -p "Please input No.(1-999, 0 is exit) to open file: " LINE
 if [ $LINE -ne 0 ]
 then
-	line_code="$(echo "${gg:5}" | awk '{print $1}' | sed -n ""$LINE"p")"
+	line_code="$(echo "${gg:5}" | awk '{print $2}' | sed -n ""$LINE"p")"
 	lf=${line_code%%:*}
 	line_code=${line_code#*:}
 	ll=${line_code%%:*}
