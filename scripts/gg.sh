@@ -14,7 +14,8 @@
 # -------------------------------------------
 
 echo "=-----------------------BEGIN------------------------------="
-gg=$(grep -Iinr --color=always --include=*.{cpp,c,h,td,inc}  "$1" \
+#gg=$(grep -Inr --color=always --include=*.{cpp,c,h,td,inc}  "$1" \
+gg=$(grep -Iinr --color=always "$1" \
      | awk '{printf("%3d. %s\n",NR,$0)}' \
      | tee /dev/tty)
 gg=$(echo "$gg" | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g")
@@ -24,7 +25,7 @@ echo "=------------------------END-------------------------------="
 read -p "Please input No.(1-999, 0 is exit) to open file: " LINE
 if [ $LINE -ne 0 ]
 then
-	line_code="$(echo "${gg:5}" | awk '{print $2}' | sed -n ""$LINE"p")"
+	line_code="$(echo "${gg}" | awk '{print $2}' | sed -n ""$LINE"p")"
 	lf=${line_code%%:*}
 	line_code=${line_code#*:}
 	ll=${line_code%%:*}
