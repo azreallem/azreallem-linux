@@ -97,26 +97,16 @@ if has("cscope")
     set csverb
 endif
 
-:set cscopequickfix=s-,c-,d-,i-,t-,e-
-
-nmap <F1> :cscope help<cr>
-nmap <F5> :cscope help<cr>:cs find 
-nmap <F6> :cscope help<cr>:vert scs find 
- 
-
 function GitDiff()
     :silent write
     :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
     :redraw!
 endfunction
 
-nnoremap <F4> :call GitDiff()<cr>
-
 let g:gitgutter_use_location_list = 0
 set updatetime=100
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
-nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
 
 "function! GitStatus()
 "  let [a,m,r] = GitGutterGetHunkSummary()
@@ -128,3 +118,7 @@ nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
 highlight CursorLine   cterm=NONE ctermbg=black guibg=NONE guifg=NONE
 set cursorline
 
+nmap <F1> :cscope help<cr>:cs find 
+nmap <F2> :cscope help<cr>:vert scs find 
+nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
+nnoremap <F4> :call GitDiff()<cr>
