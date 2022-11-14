@@ -15,7 +15,7 @@
 
 echo "=-----------------------BEGIN------------------------------="
 #gg=$(grep -Inr --color=always --include=*.{cpp,c,h,td,inc}  "$1" \
-gg=$(grep -Iinr --color=always "$1" \
+gg=$(grep -Iinr --color=always --exclude={tags,*output*,cscope.*} "$1" \
      | awk '{printf("%3d. %s\n",NR,$0)}' \
      | tee /dev/tty)
 gg=$(echo "$gg" | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g")

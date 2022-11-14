@@ -20,9 +20,9 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 :filetype plugin on
 
 syntax on
-" set laststatus=2
+set laststatus=2
 set mouse=r
-" set paste
+set paste
 
 
 " enable hightlight search
@@ -30,6 +30,7 @@ set hlsearch
 " set cursorline
 set autoindent
 set nu
+set paste
 
 " theme
 
@@ -44,7 +45,7 @@ let g:vim_markdown_folding_disabled = 1
 
 
 " mapping
-" map <C-h> :browse oldfiles<CR>
+map gh :browse oldfiles<CR>
 
 " Shortcuts to move between tabs with Ctrl+h/j
 function TabLeft()
@@ -63,8 +64,8 @@ function TabRight()
    endif
 endfunction
 
-map <silent><C-k> :execute TabRight()<CR>
 map <silent><C-j> :execute TabLeft()<CR>
+map <silent><C-k> :execute TabRight()<CR>
 
 " ale Plugin
 "nmap <silent> <C-n> <Plug>(ale_next_wrap)
@@ -98,10 +99,9 @@ endif
 
 :set cscopequickfix=s-,c-,d-,i-,t-,e-
 
-nmap <C-_>s :cs find <C-R>=expand("<cword>")<CR><CR>
-nmap <silent> <F5> :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <silent> <F6> :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <silent> <F7> :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <F1> :cscope help<cr>
+nmap <F5> :cscope help<cr>:cs find 
+nmap <F6> :cscope help<cr>:vert scs find 
  
 
 function GitDiff()
@@ -110,14 +110,13 @@ function GitDiff()
     :redraw!
 endfunction
 
-nnoremap <leader>gd :call GitDiff()<cr>
+nnoremap <F4> :call GitDiff()<cr>
 
-" gitgutter plugin setting
-" let g:gitgutter_use_location_list =  0
+let g:gitgutter_use_location_list = 0
 set updatetime=100
-"command! Gqf GitGutterQuickFix | copen
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
+nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
 
 "function! GitStatus()
 "  let [a,m,r] = GitGutterGetHunkSummary()
@@ -125,8 +124,7 @@ nmap gk <Plug>(GitGutterPrevHunk)
 "endfunction
 "set statusline+=%{GitStatus()}
 
-" GitGutter
-autocmd BufWinEnter * execute 'GitGutterQuickFix'
-
-
+" Highlight cursor line underneath the cursor horizontally.
+highlight CursorLine   cterm=NONE ctermbg=black guibg=NONE guifg=NONE
+set cursorline
 
