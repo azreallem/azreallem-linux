@@ -83,7 +83,7 @@ map <silent><C-k> :execute TabRight()<CR>
 " au BufNewFile,BufRead *.* match Over80 '\%>80v.*'
 " set colorcolumn=81
 " let &colorcolumn=join(range(1,80),",")."80,".join(range(81,9999),",")
-" set background=dark
+set background=dark
 "
 
 if has("cscope")
@@ -115,7 +115,7 @@ nmap gk <Plug>(GitGutterPrevHunk)
 "set statusline+=%{GitStatus()}
 
 " Highlight cursor line underneath the cursor horizontally.
-highlight CursorLine   cterm=NONE ctermbg=black guibg=NONE guifg=NONE
+highlight CursorLine   cterm=NONE ctermbg=grey guibg=NONE guifg=NONE
 set cursorline
 
 nmap <F1> :cscope help<cr>:cs find 

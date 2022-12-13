@@ -115,7 +115,7 @@ alias ff="find . -name"
 alias ifconfig="/sbin/ifconfig"
 
 # loongson
-export ALL_PROXY="http://10.20.42.106:1081"
+#export ALL_PROXY="http://10.20.42.106:1081"
 
 # -------------------------- others -------------------------
 function title()
