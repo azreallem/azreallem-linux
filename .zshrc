@@ -109,35 +109,20 @@ setopt no_nomatch
 # -------------------------- alias --------------------------
 #alias rm="trash-put"
 alias cp="cp -i"
-alias pdf="evince"
 alias gg="grep -Inr --include=*.{cpp,c,h,inc,td}"
 alias ff="find . -name"
 alias ifconfig="/sbin/ifconfig"
-
-# loongson
-export ALL_PROXY="http://10.20.42.106:1081"
+alias vimrc="vim $HOME/.vimrc"
+alias zshrc="vim $HOME/.zshrc"
+alias tmux.conf="vim $HOME/.tmux.conf"
 
 # -------------------------- others -------------------------
-function title()
-{
-    if [ $# -eq 0 ]
-        then
-        eval set -- "\\u@\\h: \\w"
-    fi
-
-    case $TERM in
-        xterm*) local title="\[\033]0;$@\007\]";;
-        *) local title=''
-    esac
-    local prompt=$(echo "$PS1" | sed -e 's/\\\[\\033\]0;.*\\007\\\]//')
-    PS1="${title}${prompt}"
-}
 
 . /usr/share/autojump/autojump.sh
 
 
-# --------------- win11-wsl2 proxy config -------------------
+## --------------- win11-wsl2 proxy config -------------------
 if [ ! -z $(uname -r | grep -i "wsl") ] ; then
-    host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ")
-    export ALL_PROXY="http://$host_ip:10811"
+    export http_proxy="http://192.168.31.20:10811"
+    export https_proxy="http://192.168.31.20:10811"
 fi

@@ -11,41 +11,57 @@ Plugin 'antiagainst/vim-tablegen'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+"" auto update configure of ~/.vimrc
+"autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
-" auto update configure of ~/.vimrc
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" cscope file auto load
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=1
+    set cst
+    set nocsverb
+    if filereadable("cscope.out")
+            cs add cscope.out
+    endif
+    set csverb
+endif
 
 " enable fiee type detection
 :filetype on
 :filetype plugin on
 
+
+
+" NORMAL ===>
+
 syntax on
 set laststatus=2
 set mouse=r
-set paste
-
-
-" enable hightlight search
 set hlsearch
-" set cursorline
 set autoindent
 set nu
-set paste
+set ru
+set wildmenu
+"set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
 
-" theme
-
-
-" others
-" set background=dark
-set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
-highlight LineNr term=bold cterm=NONE ctermfg=Grey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-
-" vim_markdown Plugin
-let g:vim_markdown_folding_disabled = 1
+" <=== NORMAL
 
 
-" mapping
-map gh :browse oldfiles<CR>
+
+" THEME ===>
+
+colorscheme desert
+set cursorline
+hi CursorLine term=bold cterm=bold guibg=Grey40
+"" Highlight cursor line underneath the cursor horizontally.
+"highlight CursorLine cterm=NONE ctermbg=grey guibg=NONE guifg=NONE
+"set cursorline
+
+" <=== THEME
+
+
+
+" FUNCTIONS ===>
 
 " Shortcuts to move between tabs with Ctrl+h/j
 function TabLeft()
@@ -67,58 +83,42 @@ endfunction
 map <silent><C-j> :execute TabLeft()<CR>
 map <silent><C-k> :execute TabRight()<CR>
 
-" ale Plugin
-"nmap <silent> <C-n> <Plug>(ale_next_wrap)
-"" let g:ale_lint_on_text_changed = 'never'
-"let g:ale_lint_on_enter = 0
-"let g:ale_linters = {
-"\   'c++': ['g++'],
-"\   'c': ['gcc'],
-"\   'python': ['pylint'],
-"\}
-"map <silent><F3> :ALEToggle<CR>:set nu<CR>
-"map <silent><F4> :ALEDisable<CR>:set nonu<CR>
-
-" hi Over80 guifg=fg guibg=Blue
-" au BufNewFile,BufRead *.* match Over80 '\%>80v.*'
-" set colorcolumn=81
-" let &colorcolumn=join(range(1,80),",")."80,".join(range(81,9999),",")
-" set background=dark
-"
-
-if has("cscope")
-    set csprg=/usr/bin/cscope
-    set csto=1
-    set cst 
-    set nocsverb
-    if filereadable("cscope.out")
-            cs add cscope.out
-    endif
-    set csverb
-endif
-
+" Shortcuts to show gitdiff with F4
 function GitDiff()
     :silent write
     :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
     :redraw!
 endfunction
 
+nnoremap <F4> :call GitDiff()<cr>
+
+" <=== FUNCTIONS
+
+
+" PLUGIN ===>
+
+" vim_markdown Plugin
+let g:vim_markdown_folding_disabled = 1
+
+" gitgutter Plugin
+set foldtext=gitgutter#fold#foldtext()
 let g:gitgutter_use_location_list = 0
 set updatetime=100
-nmap gj <Plug>(GitGutterNextHunk)
-nmap gk <Plug>(GitGutterPrevHunk)
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
 
-"function! GitStatus()
-"  let [a,m,r] = GitGutterGetHunkSummary()
-"  return printf('+%d ~%d -%d', a, m, r)
-"endfunction
-"set statusline+=%{GitStatus()}
+" <=== PLUGIN
 
-" Highlight cursor line underneath the cursor horizontally.
-highlight CursorLine   cterm=NONE ctermbg=black guibg=NONE guifg=NONE
-set cursorline
+
+
+" MAPPING ===>
 
 nmap <F1> :cscope help<cr>:cs find 
 nmap <F2> :cscope help<cr>:vert scs find 
 nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
-nnoremap <F4> :call GitDiff()<cr>
+set pastetoggle=<F9>
+nmap gj <Plug>(GitGutterNextHunk)
+nmap gk <Plug>(GitGutterPrevHunk)
+
+" <=== MAPPING
