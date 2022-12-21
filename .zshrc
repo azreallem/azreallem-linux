@@ -71,7 +71,9 @@ HIST_STAMPS="yyyy-mm-dd"
 # $ZSH/plugins/ Custom plugins may be added to $ZSH_CUSTOM/plugins/ Example
 # format: plugins=(rails git textmate ruby lighthouse) Add wisely, as too many
 # plugins slow down shell startup.
-plugins=(zsh-syntax-highlighting)
+# git clone https://github.com/wting/autojump.git
+plugins=(zsh-syntax-highlighting autojump)
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=999999
@@ -116,9 +118,6 @@ alias vimrc="vim $HOME/.vimrc"
 alias zshrc="vim $HOME/.zshrc"
 alias tmux.conf="vim $HOME/.tmux.conf"
 
-# -------------------------- others -------------------------
-
-. /usr/share/autojump/autojump.sh
 
 
 ## --------------- win11-wsl2 proxy config -------------------
