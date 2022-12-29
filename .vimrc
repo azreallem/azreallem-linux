@@ -117,7 +117,7 @@ nmap ghp <Plug>(GitGutterPreviewHunk)
 nmap <F1> :cscope help<cr>:cs find 
 nmap <F2> :cscope help<cr>:vert scs find 
 nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
-set pastetoggle=<F9>
+set pastetoggle=<C-V>
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
 
