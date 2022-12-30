@@ -1,0 +1,10 @@
+[user]
+	name = gaoliang
+	email = azreallem@gmail.com
+[core]
+	editor = vim
+[http "https://github.com"]
+	proxy = http://192.168.31.20:10811
+[oh-my-zsh]
+	hide-dirty = 1
+	hide-status = 1
