@@ -9,10 +9,10 @@ export PATH="$HOME/scripts/work:$HOME/scripts/win11:$HOME/scripts:$PATH"
 # theme each time oh-my-zsh is loaded, in which case, to know which specific
 # one was loaded, run: echo $RANDOM_THEME See
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="ys"
+ZSH_THEME="ys"
 #ZSH_THEME="random"
 #ZSH_THEME="peepcode"
-ZSH_THEME="geoffgarside"
+#ZSH_THEME="geoffgarside"
 
 # Set list of themes to pick from when loading at random Setting this variable
 # when ZSH_THEME=random will cause zsh to load a theme from this variable

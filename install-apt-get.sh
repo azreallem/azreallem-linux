@@ -5,7 +5,7 @@ sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 # apt-get install
 sudo apt-get update
-sudo apt-get install aptitude zsh vim tmux autojump mate-terminal
+sudo apt-get install aptitude zsh vim tmux mate-terminal
 sudo apt-get install gcc g++ gdb 
 
 # scripts & backups
@@ -19,6 +19,9 @@ cp -r scripts $HOME
 
 # tmux configs
 cp .tmux.conf $HOME
+
+git clone https://github.com/wting/autojump.git ~/autojump
+python ~/autojump/install.py
 
 # vim config
 cp .vimrc $HOME
