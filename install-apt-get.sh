@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # modify sources.list of Ubuntu to ustc.edu.cn
-sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+#sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 # apt-get install
 sudo apt-get update
-sudo apt-get install aptitude zsh vim tmux mate-terminal
+sudo apt-get install aptitude zsh vim tmux mate-terminal curl wget
 sudo apt-get install gcc g++ gdb 
 
 # backups
@@ -21,6 +21,7 @@ cp .tmux.conf $HOME
 cp -r scripts $HOME
 
 git clone https://github.com/wting/autojump.git ~/autojump
+sudo ln -s /usr/bin/python3 /usr/bin/python
 python ~/autojump/install.py
 
 # vim config
