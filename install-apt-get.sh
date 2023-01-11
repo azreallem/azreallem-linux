@@ -44,5 +44,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 wait
 cp .zshrc $HOME
 zsh
+sudo chsh -s /usr/bin/zsh
 source .zshrc
 echo "Install Finished."
