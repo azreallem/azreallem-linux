@@ -6,7 +6,7 @@
 # apt-get install
 sudo apt-get update
 sudo apt-get install aptitude zsh vim tmux mate-terminal curl wget
-sudo apt-get install gcc g++ gdb 
+sudo apt-get install gcc g++ gdb cscope
 
 # backups
 dir=backups_$(date +%y%m%d%H%M%S)
