@@ -80,17 +80,12 @@ function TabRight()
    endif
 endfunction
 
-map <silent><C-j> :execute TabLeft()<CR>
-map <silent><C-k> :execute TabRight()<CR>
-
 " Shortcuts to show gitdiff with F4
 function GitDiff()
     :silent write
     :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
     :redraw!
 endfunction
-
-nnoremap <F4> :call GitDiff()<cr>
 
 " <=== FUNCTIONS
 
@@ -104,9 +99,6 @@ let g:vim_markdown_folding_disabled = 1
 set foldtext=gitgutter#fold#foldtext()
 let g:gitgutter_use_location_list = 0
 set updatetime=100
-nmap ghs <Plug>(GitGutterStageHunk)
-nmap ghu <Plug>(GitGutterUndoHunk)
-nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " <=== PLUGIN
 
@@ -114,11 +106,18 @@ nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " MAPPING ===>
 
+map <silent><C-j> :execute TabLeft()<CR>
+map <silent><C-k> :execute TabRight()<CR>
+
 nmap <F1> :cscope help<cr>:cs find 
 nmap <F2> :cscope help<cr>:vert scs find 
 nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
+nnoremap <F4> :call GitDiff()<cr>
 set pastetoggle=<F9>
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " <=== MAPPING

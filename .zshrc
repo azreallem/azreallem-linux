@@ -117,11 +117,5 @@ alias ifconfig="/sbin/ifconfig"
 alias vimrc="vim $HOME/.vimrc"
 alias zshrc="vim $HOME/.zshrc"
 alias tmux.conf="vim $HOME/.tmux.conf"
+alias proxyconfig="export ALL_PROXY=http://127.0.0.1:7890"
 
-
-
-## --------------- win11-wsl2 proxy config -------------------
-if [ ! -z $(uname -r | grep -i "wsl") ] ; then
-    export http_proxy="http://192.168.31.20:10811"
-    export https_proxy="http://192.168.31.20:10811"
-fi
