@@ -80,12 +80,23 @@ function TabRight()
    endif
 endfunction
 
+map <silent><C-j> :execute TabLeft()<CR>
+map <silent><C-k> :execute TabRight()<CR>
+
 " Shortcuts to show gitdiff with F4
 function GitDiff()
     :silent write
     :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
     :redraw!
 endfunction
+
+func! ReConnectCscope()
+	exec "cs kill 0"
+	exec "!cscope.sh"
+	exec "cs add cscope.out"
+endfunc
+
+nnoremap <F4> :call GitDiff()<cr>
 
 " <=== FUNCTIONS
 
@@ -99,6 +110,9 @@ let g:vim_markdown_folding_disabled = 1
 set foldtext=gitgutter#fold#foldtext()
 let g:gitgutter_use_location_list = 0
 set updatetime=100
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " <=== PLUGIN
 
@@ -106,18 +120,26 @@ set updatetime=100
 
 " MAPPING ===>
 
-map <silent><C-j> :execute TabLeft()<CR>
-map <silent><C-k> :execute TabRight()<CR>
-
 nmap <F1> :cscope help<cr>:cs find 
-nmap <F2> :cscope help<cr>:vert scs find 
+nmap <F2> :cscope help<cr>:tab cs find 
 nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
-nnoremap <F4> :call GitDiff()<cr>
+" map <F5> :!cscope.sh<CR>:cs reset<CR><CR>
+map <F12> : call ReConnectCscope()<cr>
 set pastetoggle=<F9>
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
-nmap ghs <Plug>(GitGutterStageHunk)
-nmap ghu <Plug>(GitGutterUndoHunk)
-nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " <=== MAPPING
+
+" cscope
+
+noremap <leader>cs :cs find s 
+noremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+noremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+noremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+noremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+noremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+noremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+noremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+noremap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+

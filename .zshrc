@@ -118,4 +118,5 @@ alias vimrc="vim $HOME/.vimrc"
 alias zshrc="vim $HOME/.zshrc"
 alias tmux.conf="vim $HOME/.tmux.conf"
 alias proxyconfig="export ALL_PROXY=http://127.0.0.1:7890"
+alias out="tee ~/tmp.log"
 
