@@ -36,7 +36,7 @@ endif
 
 syntax on
 set laststatus=2
-set mouse=r
+set mouse=a
 set hlsearch
 set autoindent
 set nu
