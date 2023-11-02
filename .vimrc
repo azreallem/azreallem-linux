@@ -40,12 +40,11 @@ set mouse=a
 set hlsearch
 set autoindent
 set nu
-set ru
 set wildmenu
+set paste
 "set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
 
 " <=== NORMAL
-
 
 
 " THEME ===>
@@ -58,7 +57,6 @@ hi CursorLine term=bold cterm=bold guibg=Grey40
 "set cursorline
 
 " <=== THEME
-
 
 
 " FUNCTIONS ===>
@@ -80,9 +78,6 @@ function TabRight()
    endif
 endfunction
 
-map <silent><C-j> :execute TabLeft()<CR>
-map <silent><C-k> :execute TabRight()<CR>
-
 " Shortcuts to show gitdiff with F4
 function GitDiff()
     :silent write
@@ -96,8 +91,6 @@ func! ReConnectCscope()
 	exec "cs add cscope.out"
 endfunc
 
-nnoremap <F4> :call GitDiff()<cr>
-
 " <=== FUNCTIONS
 
 
@@ -110,36 +103,34 @@ let g:vim_markdown_folding_disabled = 1
 set foldtext=gitgutter#fold#foldtext()
 let g:gitgutter_use_location_list = 0
 set updatetime=100
-nmap ghs <Plug>(GitGutterStageHunk)
-nmap ghu <Plug>(GitGutterUndoHunk)
-nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " <=== PLUGIN
 
 
-
 " MAPPING ===>
 
-nmap <F1> :cscope help<cr>:cs find 
-nmap <F2> :cscope help<cr>:tab cs find 
-nnoremap <F3> :GitGutterQuickFix<cr>:copen<cr>
-" map <F5> :!cscope.sh<CR>:cs reset<CR><CR>
-map <F12> : call ReConnectCscope()<cr>
-set pastetoggle=<F9>
+nmap cf :cscope help<cr>:cs find 
+nmap tcf :cscope help<cr>:tab cs find 
+nmap <F1> :GitGutterQuickFix<cr>:copen<cr>
+nmap <F2> :call GitDiff()<cr>
+nmap <F5> :!cscope.sh<CR>:cs reset<CR><CR>
+nmap <F11> :set tabstop=4<cr>:set shiftwidth=4<cr>:set expandtab<cr> 
+nmap <F12> :call ReConnectCscope()<cr>
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
+nmap <leader>cs :cs find s 
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+map <silent><C-j> :execute TabLeft()<CR>
+map <silent><C-k> :execute TabRight()<CR>
 
 " <=== MAPPING
-
-" cscope
-
-noremap <leader>cs :cs find s 
-noremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-noremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-noremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-noremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-noremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-noremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-noremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-noremap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
-
