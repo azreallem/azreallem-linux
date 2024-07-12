@@ -3,8 +3,6 @@
 	email = azreallem@gmail.com
 [core]
 	editor = vim
-[http "https://github.com"]
-	proxy = http://127.0.0.1:7890
 [oh-my-zsh]
 	hide-dirty = 1
 	hide-status = 1

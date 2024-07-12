@@ -5,7 +5,7 @@
 
 # apt-get install
 sudo apt-get update
-sudo apt-get install aptitude zsh vim tmux mate-terminal curl wget
+sudo apt-get install aptitude zsh vim tmux curl wget
 sudo apt-get install gcc g++ gdb cscope
 
 # backups
