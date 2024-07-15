@@ -42,7 +42,9 @@ set autoindent
 set nu
 set wildmenu
 set paste
-"set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
 
 " <=== NORMAL
 
@@ -113,9 +115,8 @@ nmap cf :cscope help<cr>:cs find
 nmap tcf :cscope help<cr>:tab cs find 
 nmap <F1> :GitGutterQuickFix<cr>:copen<cr>
 nmap <F2> :call GitDiff()<cr>
-nmap <F5> :!cscope.sh<CR>:cs reset<CR><CR>
-nmap <F11> :set tabstop=4<cr>:set shiftwidth=4<cr>:set expandtab<cr> 
-nmap <F12> :call ReConnectCscope()<cr>
+nmap <F3> :set tabstop=4<cr>:set shiftwidth=4<cr>:set expandtab<cr>
+nmap <F4> :!cscope -Rbq<cr>:cs reset<cr>:call ReConnectCscope()<cr><cr><cr>
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
 nmap ghs <Plug>(GitGutterStageHunk)
@@ -134,3 +135,20 @@ map <silent><C-j> :execute TabLeft()<CR>
 map <silent><C-k> :execute TabRight()<CR>
 
 " <=== MAPPING
+
+
+" vim help ===>
+
+" \\d\+
+" \0x\x\+
+" :r !seq 1 10
+" :r !seq 1 2 10
+" :%s/\d\+/\=printf("0x%X", submatch(0))/g
+" :'<,'>s/0x\x\+/\=printf("%d",submatch(0))/g
+" |zF|		zF		   create a fold for N lines
+
+" (shell help)
+" seq 0x1 2 0x20 | xargs -I {} printf "0x%02X\n" {}
+" grep -l "oldstring" *.txt | xargs -I{} sed -i "s/oldstring/newstring/g" "{}"
+
+" <=== vim help

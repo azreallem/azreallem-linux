@@ -3,7 +3,8 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="$HOME/scripts/work:$HOME/scripts/win11:$HOME/scripts:$PATH"
+export PATH="$PATH:$HOME/scripts:/usr/local/go/bin"
+export TMUX_TMPDIR=$HOME/tmp
 
 # Set name of the theme to load --- if set to "random", it will load a random
 # theme each time oh-my-zsh is loaded, in which case, to know which specific
@@ -81,6 +82,7 @@ SAVEHIST=999999
 HISTFILE=~/.zsh_history
 
 source $ZSH/oh-my-zsh.sh
+source /etc/profile.d/clash.sh
 
 # User configuration
 
@@ -111,12 +113,13 @@ setopt no_nomatch
 # -------------------------- alias --------------------------
 #alias rm="trash-put"
 alias cp="cp -i"
+alias ssh="ssh -X"
 alias gg="grep -Inr --include=*.{cpp,c,h,inc,td}"
 alias ff="find . -name"
 alias ifconfig="/sbin/ifconfig"
 alias vimrc="vim $HOME/.vimrc"
 alias zshrc="vim $HOME/.zshrc"
 alias tmux.conf="vim $HOME/.tmux.conf"
-alias proxyconfig="export ALL_PROXY=http://127.0.0.1:7890"
 alias out="tee ~/tmp.log"
+alias clear="clear;tmux clear-history"
 
