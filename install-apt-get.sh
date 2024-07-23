@@ -20,9 +20,10 @@ cp -r $HOME/scripts $dir 2>/dev/null
 cp .tmux.conf $HOME
 cp -r scripts $HOME
 
-git clone https://github.com/wting/autojump.git ~/autojump
-sudo ln -s /usr/bin/python3 /usr/bin/python
-python ~/autojump/install.py
+git clone https://github.com/wting/autojump.git autojump
+cd autojump
+./install.py
+cd ..
 
 # vim config
 echo "Please waitting (install vim) ......"
@@ -44,6 +45,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 wait
 cp .zshrc $HOME
 zsh
-sudo chsh -s /usr/bin/zsh
+chsh -s /usr/bin/zsh
 source .zshrc
 echo "Install Finished."

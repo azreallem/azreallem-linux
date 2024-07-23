@@ -82,7 +82,7 @@ SAVEHIST=999999
 HISTFILE=~/.zsh_history
 
 source $ZSH/oh-my-zsh.sh
-source /etc/profile.d/clash.sh
+#source /etc/profile.d/clash.sh
 
 # User configuration
 
