@@ -4,12 +4,12 @@
 #sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 # apt-get install
-sudo apt-get update
-sudo apt-get install aptitude zsh vim tmux curl wget
-sudo apt-get install gcc g++ gdb cscope
+#sudo apt-get update
+#sudo apt-get install aptitude zsh vim tmux curl wget
+#sudo apt-get install gcc g++ gdb cscope
 
 # backups
-dir=backups_$(date +%y%m%d%H%M%S)
+dir=backups/backups_$(date +%y%m%d%H%M%S)
 mkdir -p $dir
 cp $HOME/.tmux.conf $dir 2>/dev/null
 cp $HOME/.zshrc $dir 2>/dev/null

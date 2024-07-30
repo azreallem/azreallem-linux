@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir=backups_$(date +%y%m%d%H%M%S)
+dir=backups/backups_$(date +%y%m%d%H%M%S)
 mkdir -p $dir
 cp $HOME/.tmux.conf $dir 2>/dev/null
 cp $HOME/.zshrc $dir 2>/dev/null
