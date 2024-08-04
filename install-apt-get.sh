@@ -9,21 +9,21 @@
 #sudo apt-get install gcc g++ gdb cscope
 
 # backups
-dir=backups/backups_$(date +%y%m%d%H%M%S)
-mkdir -p $dir
-cp $HOME/.tmux.conf $dir 2>/dev/null
-cp $HOME/.zshrc $dir 2>/dev/null
-cp $HOME/.vimrc $dir 2>/dev/null
-cp -r $HOME/scripts $dir 2>/dev/null
+install_dir=$PWD
+backup_dir=backups/backups_$(date +%y%m%d%H%M%S)
+mkdir -p $backup_dir
+cp $HOME/.tmux.conf $backup_dir 2>/dev/null
+cp $HOME/.zshrc $backup_dir 2>/dev/null
+cp $HOME/.vimrc $backup_dir 2>/dev/null
+cp -r $HOME/scripts $backup_dir 2>/dev/null
 
 #  copy config & scripts
 cp .tmux.conf $HOME
 cp -r scripts $HOME
 
-git clone https://github.com/wting/autojump.git autojump
-cd autojump
-./install.py
-cd ..
+git clone https://github.com/wting/autojump.git $install_dir/autojump
+cd autojump && ./install.py
+cd $install_dir
 
 # vim config
 echo "Please waitting (install vim) ......"
@@ -39,10 +39,8 @@ echo "Install Finished."
 # oh-my-zsh config
 echo "Please waitting (install oh-my-zsh) ......"
 rm -rf $HOME/.oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &
-sleep 5
+sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-wait
 cp .zshrc $HOME
 zsh
 chsh -s /usr/bin/zsh
