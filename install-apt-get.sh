@@ -4,9 +4,9 @@
 #sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 # apt-get install
-#sudo apt-get update
-#sudo apt-get install aptitude zsh vim tmux curl wget
-#sudo apt-get install gcc g++ gdb cscope
+sudo apt-get update
+sudo apt-get install aptitude zsh vim tmux curl wget net-tools
+sudo apt-get install gcc g++ gdb cscope
 
 # backups
 install_dir=$PWD
