@@ -5,7 +5,7 @@
 
 # apt-get install
 sudo apt-get update
-sudo apt-get install aptitude zsh vim tmux curl wget net-tools
+sudo apt-get install aptitude zsh vim tmux curl wget net-tools ssh
 sudo apt-get install gcc g++ gdb cscope
 
 # backups
@@ -34,6 +34,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp .vimrc $HOME
 source $HOME/.vimrc 2>/dev/null
 vim +PluginInstall +qall &> /dev/null &
+mkdir ~/.vim/doc && cp -r .doc/* ~/.vim/doc/*
 echo "Install Finished."
 
 # oh-my-zsh config

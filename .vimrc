@@ -8,8 +8,12 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'jmcantrell/vim-diffchanges'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'antiagainst/vim-tablegen'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ycm-core/YouCompleteMe'
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+
 
 "" auto update configure of ~/.vimrc
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
@@ -46,6 +50,8 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
 
+
+
 " <=== NORMAL
 
 
@@ -57,6 +63,7 @@ hi CursorLine term=bold cterm=bold guibg=Grey40
 "" Highlight cursor line underneath the cursor horizontally.
 "highlight CursorLine cterm=NONE ctermbg=grey guibg=NONE guifg=NONE
 "set cursorline
+highlight MatchParen ctermfg=Red ctermbg=Yellow guifg=Red guibg=Yellow
 
 " <=== THEME
 
@@ -131,24 +138,17 @@ nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
-map <silent><C-j> :execute TabLeft()<CR>
-map <silent><C-k> :execute TabRight()<CR>
+"map <silent><C-j> :execute TabLeft()<CR>
+"map <silent><C-k> :execute TabRight()<CR>
 
 " <=== MAPPING
 
+" COMMAND ===>
 
-" vim help ===>
+" before exec in the cmd of vim: helptags ~/.vim/doc/
+command! MyHelp help myhelp
+command! MyVimHelp help myvimhelp
 
-" \\d\+
-" \0x\x\+
-" :r !seq 1 10
-" :r !seq 1 2 10
-" :%s/\d\+/\=printf("0x%X", submatch(0))/g
-" :'<,'>s/0x\x\+/\=printf("%d",submatch(0))/g
-" |zF|		zF		   create a fold for N lines
+" <=== COMMAND
 
-" (shell help)
-" seq 0x1 2 0x20 | xargs -I {} printf "0x%02X\n" {}
-" grep -l "oldstring" *.txt | xargs -I{} sed -i "s/oldstring/newstring/g" "{}"
-
-" <=== vim help
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
