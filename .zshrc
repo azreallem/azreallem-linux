@@ -5,6 +5,8 @@
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$PATH:$HOME/scripts:/usr/local/go/bin"
 export TMUX_TMPDIR=$HOME/tmp
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
 
 # Set name of the theme to load --- if set to "random", it will load a random
 # theme each time oh-my-zsh is loaded, in which case, to know which specific
@@ -122,4 +124,39 @@ alias zshrc="vim $HOME/.zshrc"
 alias tmux.conf="vim $HOME/.tmux.conf"
 alias out="tee ~/tmp.log"
 alias clear="clear;tmux clear-history"
+
+proxy_on() {
+        export http_proxy=http://127.0.0.1:7890
+        export https_proxy=http://127.0.0.1:7890
+        export no_proxy=127.0.0.1,localhost
+        export HTTP_PROXY=http://127.0.0.1:7890
+        export HTTPS_PROXY=http://127.0.0.1:7890
+        export NO_PROXY=127.0.0.1,localhost
+        echo -e "\033[32m[√] proxy on finished.\033[0m"
+}
+
+proxy_off() {
+        export http_proxy=
+        export https_proxy=
+        export no_proxy=
+        export HTTP_PROXY=
+        export HTTPS_PROXY=
+        export NO_PROXY=
+        echo -e "\033[32m[√] proxy off finished.\033[0m"
+}
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/gaoliang/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/gaoliang/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/gaoliang/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/gaoliang/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
