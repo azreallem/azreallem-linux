@@ -13,6 +13,7 @@ export LC_ALL="zh_CN.UTF-8"
 # one was loaded, run: echo $RANDOM_THEME See
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="ys"
+#ZSH_THEME="robbyrussell"
 #ZSH_THEME="random"
 #ZSH_THEME="peepcode"
 #ZSH_THEME="geoffgarside"
@@ -76,11 +77,12 @@ HIST_STAMPS="yyyy-mm-dd"
 # plugins slow down shell startup.
 # git clone https://github.com/wting/autojump.git
 plugins=(zsh-syntax-highlighting autojump)
-[[ -s /home/gaoliang/.autojump/etc/profile.d/autojump.sh ]] && source /home/gaoliang/.autojump/etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=999999
-SAVEHIST=999999
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.zsh_history
 
 source $ZSH/oh-my-zsh.sh
@@ -113,7 +115,12 @@ setopt no_nomatch
 
 
 # -------------------------- alias --------------------------
-#alias rm="trash-put"
+alias rm="trash-put"
+#trash-put           把文件或目录移动到回收站
+#trash-empty         清空回收站
+#trash-list          列出回收站文件
+#trash-restore       恢复回收站文件
+#trash-rm            删除回收站文件
 alias cp="cp -i"
 alias ssh="ssh -X"
 alias gg="grep -Inr --include=*.{cpp,c,h,inc,td}"
@@ -122,30 +129,11 @@ alias ifconfig="/sbin/ifconfig"
 alias vimrc="vim $HOME/.vimrc"
 alias zshrc="vim $HOME/.zshrc"
 alias tmux.conf="vim $HOME/.tmux.conf"
+alias diffvimrc="vimdiff $HOME/.vimrc .vimrc"
+alias diffzshrc="vimdiff $HOME/.zshrc .zshrc"
+alias difftmux.conf="vimdiff $HOME/.tmux.conf .tmux.conf"
 alias out="tee ~/tmp.log"
 alias clear="clear;tmux clear-history"
-
-# 开启系统代理
-proxy_on() {
-	export http_proxy=http://127.0.0.1:7890
-	export https_proxy=http://127.0.0.1:7890
-	export no_proxy=127.0.0.1,localhost
-    	export HTTP_PROXY=http://127.0.0.1:7890
-    	export HTTPS_PROXY=http://127.0.0.1:7890
- 	export NO_PROXY=127.0.0.1,localhost
-	echo -e "\033[32m[√] 已开启代理\033[0m"
-}
-
-# 关闭系统代理
-proxy_off(){
-	unset http_proxy
-	unset https_proxy
-	unset no_proxy
-  	unset HTTP_PROXY
-	unset HTTPS_PROXY
-	unset NO_PROXY
-	echo -e "\033[31m[×] 已关闭代理\033[0m"
-}
 
 fg() {
     if [[ $# -eq 1 && $1 = - ]]; then
@@ -154,4 +142,45 @@ fg() {
         builtin fg %"$@"
     fi
 }
+
+proxy_on() {
+	export http_proxy=http://127.0.0.1:7890
+	export https_proxy=http://127.0.0.1:7890
+	export no_proxy=127.0.0.1,localhost
+	export HTTP_PROXY=http://127.0.0.1:7890
+	export HTTPS_PROXY=http://127.0.0.1:7890
+	export NO_PROXY=127.0.0.1,localhost
+	echo -e "\033[32m[√] proxy on finished.\033[0m"
+}
+
+proxy_off() {
+	export http_proxy=
+	export https_proxy=
+	export no_proxy=
+	export HTTP_PROXY=
+	export HTTPS_PROXY=
+	export NO_PROXY=
+	echo -e "\033[32m[√] proxy off finished.\033[0m"
+}
+
+if [[ -d "/home/gaoliang/anaconda3" ]]; then
+	# >>> conda initialize >>>
+	# !! Contents within this block are managed by 'conda init' !!
+	__conda_setup="$('/home/gaoliang/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+	if [ $? -eq 0 ]; then
+	    eval "$__conda_setup"
+	else
+	    if [ -f "/home/gaoliang/anaconda3/etc/profile.d/conda.sh" ]; then
+	        . "/home/gaoliang/anaconda3/etc/profile.d/conda.sh"
+	    else
+	        export PATH="/home/gaoliang/anaconda3/bin:$PATH"
+	    fi
+	fi
+	unset __conda_setup
+	# <<< conda initialize <<<
+fi
+
+if [[ -f "/opt/ros/rolling/setup.zsh" ]]; then
+	source /opt/ros/rolling/setup.zsh
+fi
 
