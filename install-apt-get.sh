@@ -8,7 +8,7 @@ echo $HTTPS_PROXY
 # apt-get install
 sudo apt-get update -y
 sudo apt-get install aptitude zsh vim tmux curl wget net-tools ssh -y
-sudo apt-get install gcc g++ gdb cscope trash python -y
+sudo apt-get install gcc g++ gdb cscope trash-cli git python -y
 
 # backups
 install_dir=$PWD
@@ -24,7 +24,7 @@ cp .tmux.conf $HOME
 cp -r scripts $HOME
 
 git clone https://github.com/wting/autojump.git $install_dir/autojump
-cd autojump && python install.py
+cd autojump && ./install.py
 cd $install_dir
 
 # vim config
