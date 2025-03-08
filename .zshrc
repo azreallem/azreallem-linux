@@ -23,15 +23,16 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 HIST_STAMPS="yyyy-mm-dd"
 
-# Load Oh My Zsh
-source "$ZSH/oh-my-zsh.sh"
-
 # -------------------------- Plugins --------------------------
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 if [[ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
     source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
+
+# Load Oh My Zsh
+source "$ZSH/oh-my-zsh.sh"
+
 
 # -------------------------- Aliases --------------------------
 
