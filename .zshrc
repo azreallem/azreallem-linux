@@ -24,11 +24,12 @@ HISTFILE=~/.zsh_history
 HIST_STAMPS="yyyy-mm-dd"
 
 # -------------------------- Plugins --------------------------
+#git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+#git clone https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git $HOME/.oh-my-zsh/custom/plugins/git
+#git clone https://github.com/wting/autojump.git $HOME/.oh-my-zsh/custom//plugins/autojump
+
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-if [[ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
-    source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
 
 # Load Oh My Zsh
 source "$ZSH/oh-my-zsh.sh"

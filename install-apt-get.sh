@@ -43,7 +43,6 @@ echo "Install Finished."
 echo "Please waitting (install oh-my-zsh) ......"
 rm -rf $HOME/.oh-my-zsh
 sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
-cp -r ./.zsh_plugins/* ~/.oh-my-zsh/custom/plugins
 cp .zshrc $HOME
 zsh
 chsh -s /usr/bin/zsh
