@@ -27,7 +27,7 @@ HIST_STAMPS="yyyy-mm-dd"
 source "$ZSH/oh-my-zsh.sh"
 
 # -------------------------- Plugins --------------------------
-
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 if [[ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
     source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
