@@ -5,18 +5,18 @@
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$PATH:$HOME/scripts:/usr/local/go/bin"
 export TMUX_TMPDIR=$HOME/tmp
-export LANG="zh_CN.UTF-8"
-export LC_ALL="zh_CN.UTF-8"
+#export LC_ALL="zh_US.UTF-8"
 
 # Set name of the theme to load --- if set to "random", it will load a random
 # theme each time oh-my-zsh is loaded, in which case, to know which specific
 # one was loaded, run: echo $RANDOM_THEME See
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="ys"
+#ZSH_THEME="ys"
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="random"
 #ZSH_THEME="peepcode"
 #ZSH_THEME="geoffgarside"
+ZSH_THEME="jonathan"
 
 # Set list of themes to pick from when loading at random Setting this variable
 # when ZSH_THEME=random will cause zsh to load a theme from this variable
@@ -78,11 +78,10 @@ HIST_STAMPS="yyyy-mm-dd"
 # git clone https://github.com/wting/autojump.git
 plugins=(zsh-syntax-highlighting autojump)
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=100000
-SAVEHIST=100000
+HISTSIZE=1000
+SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 source $ZSH/oh-my-zsh.sh
@@ -93,7 +92,6 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions if [[ -n $SSH_CONNECTION ]];
 # then export EDITOR='vim' else export EDITOR='mvim' fi
@@ -139,6 +137,7 @@ for i in {0..9}; do
     alias tmux$i="tmux a -d -t $i"
 done
 alias readme="vim ~/README.md"
+alias port="netstat -tulnp"
 
 fg() {
     if [[ $# -eq 1 && $1 = - ]]; then
@@ -155,7 +154,7 @@ proxy_on() {
 	export HTTP_PROXY=http://127.0.0.1:7890
 	export HTTPS_PROXY=http://127.0.0.1:7890
 	export NO_PROXY=127.0.0.1,localhost
-	echo -e "\033[32m[√] proxy on finished.\033[0m"
+#	echo -e "\033[32m[√] proxy on finished.\033[0m"
 }
 
 proxy_off() {
@@ -189,3 +188,4 @@ if [[ -f "/opt/ros/rolling/setup.zsh" ]]; then
 	source /opt/ros/rolling/setup.zsh
 fi
 
+#proxy_on
