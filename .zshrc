@@ -26,10 +26,9 @@ HIST_STAMPS="yyyy-mm-dd"
 # -------------------------- Plugins --------------------------
 #git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-#git clone https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git $HOME/.oh-my-zsh/custom/plugins/git
 #git clone https://github.com/wting/autojump.git $HOME/.oh-my-zsh/custom//plugins/autojump
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting autojump)
 
 # Load Oh My Zsh
 source "$ZSH/oh-my-zsh.sh"
