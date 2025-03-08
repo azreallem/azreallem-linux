@@ -135,6 +135,10 @@ alias diffzshrc="vimdiff $HOME/.zshrc .zshrc"
 alias difftmux.conf="vimdiff $HOME/.tmux.conf .tmux.conf"
 alias out="tee ./tmp_$(date +"%y%m%d_%H%M%S").log"
 alias clear="clear;tmux clear-history"
+for i in {0..9}; do
+    alias tmux$i="tmux a -d -t $i"
+done
+alias readme="vim ~/README.md"
 
 fg() {
     if [[ $# -eq 1 && $1 = - ]]; then
