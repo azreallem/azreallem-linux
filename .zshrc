@@ -33,6 +33,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting autojump)
 # Load Oh My Zsh
 source "$ZSH/oh-my-zsh.sh"
 
+setopt nonomatch
 
 # -------------------------- Aliases --------------------------
 
