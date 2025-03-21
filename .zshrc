@@ -4,12 +4,12 @@ export ZSH="$HOME/.oh-my-zsh"
 export PATH="$PATH:$HOME/scripts:/usr/local/go/bin"
 export TMUX_TMPDIR="$HOME/tmp"
 export EDITOR="vim"
-export LANG="en_US.UTF-8"
+export LANG="zh_CN.UTF-8"
 
 # -------------------------- Configs --------------------------
 
 # Set Zsh theme
-ZSH_THEME="jonathan"
+ZSH_THEME="ys"
 
 # Disable auto-updates for Oh My Zsh
 DISABLE_AUTO_UPDATE="true"
