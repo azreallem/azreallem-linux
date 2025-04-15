@@ -1,17 +1,52 @@
-*myhelp.txt*      " 必须在文件开头标注文件名和标签
+*myhelp.txt*      " before exec in the cmd of vim: helptags ~/.vim/doc/
 
 自定义帮助文档
 ====================================
 
-这个帮助文档是一个示例。
+1. My VIM HELP			|my-vimnum|
+				|my-vimnormal|
+				|my-jedi-vim|
+				|my-vim-markdown|
+2. MY BASH HELP                 |my-bashhelp|
 
-命令:
-    :MyCommand      执行我的自定义命令。
-    :AnotherCmd     执行另一个命令。
 
-标签:
-    |myhelp-topic|  点击跳转到这个主题。
+1. MY VIM HELP                                         *my-vimnum*
+/\d\+                                                  find all num
+/0x\x\+                                                find all 0x num
+:r !seq 1 10                                           write num from 1 to 10
+:r !seq 1 2 10                                         write num from 1 to 10 and step is 2
+:%s/\d\+/\=printf("0x%X", submatch(0))/g               modify from d to 0x
+:'<,'>s/0x\x\+/\=printf("%d",submatch(0))/g            modify from 0x to d
+
+						       *my-vimnormal*
+zF		                                       create a fold for N lines
+
+						       *my-jedi-vim*
+\g						       跳转到定义
+K						       查看文档
+
+						       *my-vim-markdown*
+zr						       reduces fold level throughout the buffer
+zR						       opens all folds
+zm						       increases fold level throughout the buffer
+zM						       folds everything all the way
+za						       toggle a fold your cursor is on
+zA						       toggle a fold your cursor is on recursively
+zo						       open a fold your cursor is on
+zO						       open a fold your cursor is on recursively
+zc						       close a fold your cursor is on
+zC						       close a fold your cursor is on recursively
+
+
+
+2. MY BASH HELP                                        *my-bashhelp*
+seq 0x1 2 0x20 | xargs -I {} printf "0x%02X\n" {}
+grep -l "oldstring" *.txt | xargs -I{} sed -i "s/oldstring/newstring/g" "{}"
+
+
+
 
 ==============================================================================
 这个文档的结尾。
+
 

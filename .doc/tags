@@ -1,6 +1,7 @@
 !_TAG_FILE_ENCODING	utf-8	//
-my-bashhelp	myvimhelp.txt	/*my-bashhelp*
-my-vimnormal	myvimhelp.txt	/*my-vimnormal*
-my-vimnum	myvimhelp.txt	/*my-vimnum*
+my-bashhelp	myhelp.txt	/*my-bashhelp*
+my-jedi-vim	myhelp.txt	/*my-jedi-vim*
+my-vim-markdown	myhelp.txt	/*my-vim-markdown*
+my-vimnormal	myhelp.txt	/*my-vimnormal*
+my-vimnum	myhelp.txt	/*my-vimnum*
 myhelp.txt	myhelp.txt	/*myhelp.txt*
-myvimhelp.txt	myvimhelp.txt	/*myvimhelp.txt*

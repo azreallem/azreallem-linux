@@ -9,7 +9,9 @@ Plugin 'jmcantrell/vim-diffchanges'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'antiagainst/vim-tablegen'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'FittenTech/fittencode.vim'
 Plugin 'ycm-core/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -46,7 +48,6 @@ set hlsearch
 set autoindent
 set nu
 set wildmenu
-set paste
 set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
@@ -106,14 +107,18 @@ endfunc
 
 " PLUGIN ===>
 
-" vim_markdown Plugin
-let g:vim_markdown_folding_disabled = 1
+" vim-markdown Plugin
+let g:vim_markdown_folding_disabled = 0
 
 " gitgutter Plugin
 set foldtext=gitgutter#fold#foldtext()
 let g:gitgutter_use_location_list = 0
 set updatetime=100
 
+" YouCompleteMe Plugin
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_use_clangd = 1
+set completeopt=menu,menuone,noselect
 " <=== PLUGIN
 
 
@@ -123,8 +128,10 @@ nmap cf :cscope help<cr>:cs find
 nmap tcf :cscope help<cr>:tab cs find 
 nmap <F1> :GitGutterQuickFix<cr>:copen<cr>
 nmap <F2> :call GitDiff()<cr>
-nmap <F3> :set tabstop=4<cr>:set shiftwidth=4<cr>:set expandtab<cr>
-nmap <F4> :!cscope -Rbq<cr>:cs reset<cr>:call ReConnectCscope()<cr><cr><cr>
+nmap <F3> :!cscope -Rbq<cr>:cs reset<cr>:call ReConnectCscope()<cr><cr><cr>
+nmap <F5> :set paste<cr>
+nmap <F6> :set tabstop=4<cr>:set shiftwidth=4<cr>:set expandtab<cr>
+nmap <F9> :FittenAutoCompletionOn<cr>
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
 nmap ghs <Plug>(GitGutterStageHunk)
@@ -139,17 +146,13 @@ nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
-"map <silent><C-j> :execute TabLeft()<CR>
-"map <silent><C-k> :execute TabRight()<CR>
+map <silent><C-j> :execute TabLeft()<CR>
+map <silent><C-k> :execute TabRight()<CR>
 
 " <=== MAPPING
 
 " COMMAND ===>
 
-" before exec in the cmd of vim: helptags ~/.vim/doc/
 command! MyHelp help myhelp
-command! MyVimHelp help myvimhelp
 
 " <=== COMMAND
-
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
