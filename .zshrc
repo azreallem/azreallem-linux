@@ -9,7 +9,8 @@ export LANG="zh_CN.UTF-8"
 # -------------------------- Configs --------------------------
 
 # Set Zsh theme
-ZSH_THEME="ys"
+#ZSH_THEME="ys"
+ZSH_THEME="frisk"
 
 # Disable auto-updates for Oh My Zsh
 DISABLE_AUTO_UPDATE="true"
@@ -68,42 +69,42 @@ fg() {
     fi
 }
 
-proxy_on() {
-    export http_proxy="http://127.0.0.1:7890"
-    export https_proxy="http://127.0.0.1:7890"
-    export no_proxy="127.0.0.1,localhost"
-    export HTTP_PROXY="http://127.0.0.1:7890"
-    export HTTPS_PROXY="http://127.0.0.1:7890"
-    export NO_PROXY="127.0.0.1,localhost"
-}
-
-proxy_off() {
-    unset http_proxy https_proxy no_proxy HTTP_PROXY HTTPS_PROXY NO_PROXY
-    echo -e "\033[32m[√] Proxy has been turned off.\033[0m"
-}
-
-# -------------------------- Loading -----------------------------
-
-# Load Conda if available
-if [[ -d "/home/gaoliang/anaconda3" ]]; then
-    __conda_setup="$('/home/gaoliang/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "/home/gaoliang/anaconda3/etc/profile.d/conda.sh" ]; then
-            . "/home/gaoliang/anaconda3/etc/profile.d/conda.sh"
-        else
-            export PATH="/home/gaoliang/anaconda3/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-fi
-
-# Load ROS environment if available
-if [[ -f "/opt/ros/rolling/setup.zsh" ]]; then
-    source /opt/ros/rolling/setup.zsh
-fi
-
-# -------------------------- Start -------------------------------
-proxy_on
-
+#proxy_on() {
+#    export http_proxy="http://127.0.0.1:7890"
+#    export https_proxy="http://127.0.0.1:7890"
+#    export no_proxy="127.0.0.1,localhost"
+#    export HTTP_PROXY="http://127.0.0.1:7890"
+#    export HTTPS_PROXY="http://127.0.0.1:7890"
+#    export NO_PROXY="127.0.0.1,localhost"
+#}
+#
+#proxy_off() {
+#    unset http_proxy https_proxy no_proxy HTTP_PROXY HTTPS_PROXY NO_PROXY
+#    echo -e "\033[32m[√] Proxy has been turned off.\033[0m"
+#}
+#
+## -------------------------- Loading -----------------------------
+#
+## Load Conda if available
+#if [[ -d "/home/gaoliang/anaconda3" ]]; then
+#    __conda_setup="$('/home/gaoliang/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#    if [ $? -eq 0 ]; then
+#        eval "$__conda_setup"
+#    else
+#        if [ -f "/home/gaoliang/anaconda3/etc/profile.d/conda.sh" ]; then
+#            . "/home/gaoliang/anaconda3/etc/profile.d/conda.sh"
+#        else
+#            export PATH="/home/gaoliang/anaconda3/bin:$PATH"
+#        fi
+#    fi
+#    unset __conda_setup
+#fi
+#
+## Load ROS environment if available
+#if [[ -f "/opt/ros/rolling/setup.zsh" ]]; then
+#    source /opt/ros/rolling/setup.zsh
+#fi
+#
+## -------------------------- Start -------------------------------
+#proxy_on
+#

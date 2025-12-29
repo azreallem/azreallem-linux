@@ -9,32 +9,29 @@ Plugin 'jmcantrell/vim-diffchanges'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'antiagainst/vim-tablegen'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'FittenTech/fittencode.vim'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'davidhalter/jedi-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-
-
-"" auto update configure of ~/.vimrc
-"autocmd BufWritePost $MYVIMRC source $MYVIMRC
-
-" cscope file auto load
-if has("cscope")
-    set csprg=/usr/bin/cscope
-    set csto=1
-    set cst
-    set nocsverb
-    if filereadable("cscope.out")
-            cs add cscope.out
-    endif
-    set csverb
-endif
-
-" enable fiee type detection
-:filetype on
-:filetype plugin on
+"
+"
+"
+""" auto update configure of ~/.vimrc
+""autocmd BufWritePost $MYVIMRC source $MYVIMRC
+"
+"" cscope file auto load
+"if has("cscope")
+"    set csprg=/usr/bin/cscope
+"    set csto=1
+"    set cst
+"    set nocsverb
+"    if filereadable("cscope.out")
+"            cs add cscope.out
+"    endif
+"    set csverb
+"endif
+"
+"" enable fiee type detection
+":filetype on
+":filetype plugin on
 
 
 
@@ -51,6 +48,13 @@ set wildmenu
 set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
+set nobackup
+set noswapfile
+set noundofile
+set paste
+
+
+
 
 
 
@@ -59,13 +63,14 @@ set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
 
 " THEME ===>
 
-colorscheme desert
-set cursorline
-hi CursorLine term=bold cterm=bold guibg=Grey40
-"" Highlight cursor line underneath the cursor horizontally.
-"highlight CursorLine cterm=NONE ctermbg=grey guibg=NONE guifg=NONE
+"colorscheme desert
+colorscheme slate
 "set cursorline
-highlight MatchParen ctermfg=Red ctermbg=Yellow guifg=Red guibg=Yellow
+"hi CursorLine term=bold cterm=bold guibg=Grey40
+""" Highlight cursor line underneath the cursor horizontally.
+""highlight CursorLine cterm=NONE ctermbg=grey guibg=NONE guifg=NONE
+""set cursorline
+"highlight MatchParen ctermfg=Red ctermbg=Yellow guifg=Red guibg=Yellow
 
 " <=== THEME
 
@@ -89,10 +94,11 @@ function TabRight()
    endif
 endfunction
 
-" Shortcuts to show gitdiff with F4
+" Shortcuts to show gitdiff with F2
+let file_path = expand('%:p')
 function GitDiff()
     :silent write
-    :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
+    :silent execute '!git diff'
     :redraw!
 endfunction
 
@@ -107,31 +113,25 @@ endfunc
 
 " PLUGIN ===>
 
-" vim-markdown Plugin
-let g:vim_markdown_folding_disabled = 0
+" vim_markdown Plugin
+let g:vim_markdown_folding_disabled = 1
 
 " gitgutter Plugin
 set foldtext=gitgutter#fold#foldtext()
 let g:gitgutter_use_location_list = 0
 set updatetime=100
 
-" YouCompleteMe Plugin
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-let g:ycm_use_clangd = 1
-set completeopt=menu,menuone,noselect
 " <=== PLUGIN
-
-
+"
+"
 " MAPPING ===>
 
 nmap cf :cscope help<cr>:cs find 
 nmap tcf :cscope help<cr>:tab cs find 
 nmap <F1> :GitGutterQuickFix<cr>:copen<cr>
 nmap <F2> :call GitDiff()<cr>
-nmap <F3> :!cscope -Rbq<cr>:cs reset<cr>:call ReConnectCscope()<cr><cr><cr>
-nmap <F5> :set paste<cr>
-nmap <F6> :set tabstop=4<cr>:set shiftwidth=4<cr>:set expandtab<cr>
-nmap <F9> :FittenAutoCompletionOn<cr>
+nmap <F3> :set tabstop=4<cr>:set shiftwidth=4<cr>:set expandtab<cr>
+nmap <F4> :!cscope -Rbq<cr>:cs reset<cr>:call ReConnectCscope()<cr><cr><cr>
 nmap gj <Plug>(GitGutterNextHunk)
 nmap gk <Plug>(GitGutterPrevHunk)
 nmap ghs <Plug>(GitGutterStageHunk)
@@ -153,6 +153,11 @@ map <silent><C-k> :execute TabRight()<CR>
 
 " COMMAND ===>
 
+" before exec in the cmd of vim: helptags ~/.vim/doc/
 command! MyHelp help myhelp
+command! MyVimHelp help myvimhelp
+
 
 " <=== COMMAND
+set clipboard=unnamed
+
