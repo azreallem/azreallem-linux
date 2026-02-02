@@ -117,7 +117,7 @@ fg() {
 # Initialization
 # ==============================================================================
 setopt nonomatch
-proxy_on
+#proxy_on
 
 # Gemini CLI
 alias gemini="gemini -y"
