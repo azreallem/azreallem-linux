@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Check if an argument is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <filename_pattern>"
+    echo "Example: $0 show.sh"
+    exit 1
+fi
+
+# Find files and print their absolute paths
+# -name "*$1*" allows for partial matches; use "$1" for exact matches
+find "$PWD" -name "*$1*" 2>/dev/null | while read -r file; do
+    # readlink -f ensures we get the real canonical path
+    readlink -f "$file"
+done

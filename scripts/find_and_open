@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Colors
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# Check arguments
+if [ -z "$1" ]; then
+    echo -e "${YELLOW}Usage: $0 <filename_pattern>${NC}"
+    echo "Example: $0 test.c"
+    echo "Example: $0 '*config*'"
+    exit 1
+fi
+
+PATTERN="$1"
+
+echo -e "${YELLOW}Searching for files matching '${CYAN}$PATTERN${YELLOW}'...${NC}"
+echo -e "${BLUE}---------------------------------------------------${NC}"
+
+# Create a temporary file to store results
+TMP_FILE=$(mktemp)
+
+# Find files and store in temp file
+find . -type f -name "*$PATTERN*" 2>/dev/null > "$TMP_FILE"
+
+# Check if any results were found
+if [ ! -s "$TMP_FILE" ]; then
+    echo -e "${RED}No files found.${NC}"
+    rm "$TMP_FILE"
+    exit 0
+fi
+
+# Display numbered list
+i=1
+while read -r file; do
+    printf "${YELLOW}%3d.${NC} %s\n" "$i" "$file"
+    ((i++))
+done < "$TMP_FILE"
+
+echo -e "${BLUE}---------------------------------------------------${NC}"
+
+# Read user input
+read -p "Enter number to open (0 to exit): " CHOICE
+
+if [[ "$CHOICE" =~ ^[0-9]+$ ]] && [ "$CHOICE" -gt 0 ]; then
+    # Get the selected file
+    SELECTED_FILE=$(sed -n "${CHOICE}p" "$TMP_FILE")
+    
+    if [ -n "$SELECTED_FILE" ]; then
+        echo -e "${GREEN}Opening $SELECTED_FILE...${NC}"
+        vim "$SELECTED_FILE"
+    else
+        echo -e "${RED}Invalid selection number.${NC}"
+    fi
+elif [ "$CHOICE" -eq 0 ]; then
+    echo "Exiting."
+else
+    echo -e "${RED}Invalid input.${NC}"
+fi
+
+# Cleanup
+rm "$TMP_FILE"

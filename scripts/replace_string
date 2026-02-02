@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Colors
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+# Check arguments
+if [ "$#" -lt 2 ]; then
+    echo -e "${YELLOW}Usage: $0 <old_string> <new_string> [file_pattern]${NC}"
+    echo "Example: $0 'foo' 'bar'"
+    echo "Example: $0 'foo' 'bar' '*.txt'"
+    exit 1
+fi
+
+OLD_STR="$1"
+NEW_STR="$2"
+FILE_PATTERN="${3:-*}"
+
+echo -e "${BLUE}Replacing '${RED}$OLD_STR${BLUE}' with '${GREEN}$NEW_STR${BLUE}' in files matching '${CYAN}$FILE_PATTERN${BLUE}'...${NC}"
+
+# Escape strings for sed
+ESCAPED_OLD=$(echo "$OLD_STR" | sed 's/|/\\|/g')
+ESCAPED_NEW=$(echo "$NEW_STR" | sed 's/|/\\|/g')
+
+find . -type f -name "$FILE_PATTERN" -print0 | xargs -0 grep -lF "$OLD_STR" | while read -r file; do
+    echo -e "${CYAN}File: $file${NC}"
+    
+    # Show diff of changes
+    grep -nF "$OLD_STR" "$file" | while read -r line; do
+        linenum=$(echo "$line" | cut -d: -f1)
+        content=$(echo "$line" | cut -d: -f2-)
+        # Format output: Line number, then separate Before and After for readability
+        echo -e "  ${YELLOW}[Line $linenum]${NC}"
+        echo -e "    ${RED}- ${content//$OLD_STR/${RED}$OLD_STR${NC}}"
+        echo -e "    ${GREEN}+ ${content//$OLD_STR/${GREEN}$NEW_STR${NC}}"
+    done
+
+    # Perform replacement
+    sed -i "s|$ESCAPED_OLD|$ESCAPED_NEW|g" "$file"
+done
+
+echo -e "${GREEN}Done.${NC}"

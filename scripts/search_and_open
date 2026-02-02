@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# Check arguments
+if [ -z "$1" ]; then
+    echo "Usage: $0 <search_term> [file_pattern]"
+    echo "Example: $0 'hello world'"
+    echo "Example: $0 'function main' '*.c'"
+    exit 1
+fi
+
+# Colors
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+SEARCH_TERM="$1"
+FILE_PATTERN="${2:-*}"
+
+echo -e "${YELLOW}Searching for '${RED}$SEARCH_TERM${YELLOW}' in '${CYAN}$FILE_PATTERN${YELLOW}'...${NC}"
+echo -e "${BLUE}---------------------------------------------------${NC}"
+
+# Create a temporary file to store results
+TMP_FILE=$(mktemp)
+
+# Grep with color always to capture it, but for our numbered list we format it ourselves
+# We need the raw data in the temp file for parsing
+# grep format: file:line:content
+raw_results=$(grep -rnI "$SEARCH_TERM" --include="$FILE_PATTERN" . 2>/dev/null)
+
+if [ -z "$raw_results" ]; then
+    echo -e "${RED}No matches found.${NC}"
+    rm "$TMP_FILE"
+    exit 0
+fi
+
+echo "$raw_results" > "$TMP_FILE"
+
+# Display with colors and line numbers
+# Pattern: filename:line:content
+i=1
+while IFS=: read -r file line content; do
+    printf "${YELLOW}%3d.${NC} ${GREEN}%s${NC}:${BLUE}%s${NC}: %s\n" "$i" "$file" "$line" "$content"
+    ((i++))
+done < "$TMP_FILE" | sed "s/$SEARCH_TERM/$(echo -e "${RED}$SEARCH_TERM${NC}")/g"
+
+echo -e "${BLUE}---------------------------------------------------${NC}"
+# Read user input
+read -p "Enter number to open (0 to exit): " CHOICE
+
+if [[ "$CHOICE" =~ ^[0-9]+$ ]] && [ "$CHOICE" -gt 0 ]; then
+    # Extract the selected line from the temp file using sed
+    SELECTED_LINE=$(sed -n "${CHOICE}p" "$TMP_FILE")
+    
+    if [ -n "$SELECTED_LINE" ]; then
+        # Parse file and line number
+        # Format is filename:linenumber:content
+        FILE_PATH=$(echo "$SELECTED_LINE" | cut -d: -f1)
+        LINE_NUM=$(echo "$SELECTED_LINE" | cut -d: -f2)
+        
+        echo "Opening $FILE_PATH at line $LINE_NUM..."
+        vim "$FILE_PATH" "+$LINE_NUM"
+    else
+        echo "Invalid selection number."
+    fi
+elif [ "$CHOICE" -eq 0 ]; then
+    echo "Exiting."
+else
+    echo "Invalid input."
+fi
+
+# Cleanup
+rm "$TMP_FILE"
