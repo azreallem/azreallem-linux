@@ -41,8 +41,12 @@ chmod +x install-config.sh
 ├── install-apt-get.sh
 ├── install-config.sh
 ├── scripts/
-│   ├── ff.sh
-│   └── gg.sh
+│   ├── find_and_open
+│   ├── fpath
+│   ├── replace_string
+│   ├── run.sh
+│   ├── search_and_open
+│   └── yank.sh
 └── backups/           # Created during installation to store old configs
 ```
 
