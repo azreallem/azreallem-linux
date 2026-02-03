@@ -56,7 +56,13 @@ set noundofile
 set autoread                " Auto read when file is changed from outside
 
 " Clipboard
-set clipboard=unnamedplus
+" Only use unnamedplus if we are in a local GUI or have a valid X connection.
+" Otherwise, rely on our custom OSC 52 function.
+if has('gui_running') || (!empty($DISPLAY) && executable('xclip'))
+    set clipboard=unnamedplus
+else
+    set clipboard=
+endif
 
 " ============================================================================
 " Theme
@@ -118,20 +124,29 @@ function! ReConnectCscope()
     exec "cs add cscope.out"
 endfunction
 
-" Clipboard Integration (Tmux/System)
+" Clipboard Integration (OSC 52 + Xclip)
 function! CopyToTmuxAndSystem()
     let l:text = @0
     
-    " 1. Tmux OSC 52 (works over SSH)
+    " 1. OSC 52 (Works over SSH/Tmux if terminal supports it)
+    " Encode text to base64 (no newlines)
+    let l:b64 = system("base64 | tr -d '\n'", l:text)
+    
+    " Construct OSC 52 sequence
     if exists('$TMUX')
-        let l:cmd = 'tmux load-buffer -w -'
-        call system(l:cmd, l:text)
-        return
+        " Tmux wrapping: \ePtmux;\e ... \e\\
+        let l:osc52 = "\x1bPtmux;\x1b\x1b]52;c;" . l:b64 . "\x07\x1b\\"
+    else
+        " Standard OSC 52
+        let l:osc52 = "\x1b]52;c;" . l:b64 . "\x07"
     endif
 
-    " 2. Xclip fallback
-    if executable('xclip')
-        call system('xclip -selection clipboard -i', l:text)
+    " Send to terminal via /dev/tty
+    call system("printf '%s' '" . l:osc52 . "' > /dev/tty")
+
+    " 2. Xclip fallback (only if local X11 is available)
+    if executable('xclip') && !empty($DISPLAY)
+        call system('xclip -selection clipboard -i 2>/dev/null', l:text)
     endif
 endfunction
 
