@@ -7,9 +7,9 @@ export TMUX_TMPDIR="$HOME/tmp"
 export EDITOR="vim"
 export LANG="zh_CN.UTF-8"
 
-# ==============================================================================
+# ============================================================================== 
 # Oh-My-Zsh Settings
-# ==============================================================================
+# ============================================================================== 
 ZSH_THEME="frisk"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
@@ -33,9 +33,9 @@ plugins=(
 
 source "$ZSH/oh-my-zsh.sh"
 
-# ==============================================================================
+# ============================================================================== 
 # Aliases
-# ==============================================================================
+# ============================================================================== 
 
 # File Safety
 alias rm="trash-put" # Requires trash-cli
@@ -68,9 +68,9 @@ for i in {0..9}; do
     alias tmux$i="tmux a -d -t $i"
 done
 
-# ==============================================================================
+# ============================================================================== 
 # Functions
-# ==============================================================================
+# ============================================================================== 
 
 # Vim Wrapper: Opens file:line (e.g. vim main.c:10)
 vim() {
@@ -79,7 +79,7 @@ vim() {
     for arg in "$@"; do
         if [[ $arg =~ :[0-9]+$ ]]; then
             file=${arg%:*} 
-            line=${arg##*:} 
+            line=${arg##*:}
             args+=("$file" "+$line")
         else
             args+=("$arg")
@@ -96,12 +96,10 @@ proxy_on() {
     export HTTP_PROXY="http://127.0.0.1:7890"
     export HTTPS_PROXY="http://127.0.0.1:7890"
     export NO_PROXY="127.0.0.1,localhost"
-    echo -e "\033[32m[√] Proxy On (127.0.0.1:7890)\033[0m"
 }
 
 proxy_off() {
     unset http_proxy https_proxy no_proxy HTTP_PROXY HTTPS_PROXY NO_PROXY
-    echo -e "\033[32m[√] Proxy Off\033[0m"
 }
 
 # Background Job Management
@@ -113,11 +111,31 @@ fg() {
     fi
 }
 
-# ==============================================================================
+# ============================================================================== 
 # Initialization
-# ==============================================================================
+# ============================================================================== 
 setopt nonomatch
-#proxy_on
+# Auto Proxy Selection
+if ss -tuln | grep -q ":7890 "; then
+    proxy_on
+else
+    proxy_off
+fi
 
 # Gemini CLI
 alias gemini="gemini -y"
+
+# ============================================================================== 
+# Prompt Customization
+# ============================================================================== 
+proxy_prompt_info() {
+  if [[ -n "$http_proxy" ]]; then
+    echo "%{$fg[green]%}[proxy_on]%{$reset_color%}"
+  else
+    echo "%{$fg[red]%}[proxy_off]%{$reset_color%}"
+  fi
+}
+
+PROMPT=$'\
+%{$fg[blue]%}%/%{$reset_color%} $(git_prompt_info)$(bzr_prompt_info)%{$fg[white]%}[%n@%m]%{$reset_color%} %{$fg[white]%}[%T]%{$reset_color%} $(proxy_prompt_info)
+%{$fg_bold[black]%}>%{$reset_color%} '

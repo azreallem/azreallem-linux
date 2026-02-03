@@ -13,10 +13,16 @@ if [ -z "$1" ]; then
     echo -e "${YELLOW}Usage: $0 <filename_pattern>${NC}"
     echo "Example: $0 test.c"
     echo "Example: $0 '*config*'"
-    exit 1
+    echo ""
+    read -p "请输入查找文件名(支持通配符): " input_pattern
+    if [ -z "$input_pattern" ]; then
+        echo "Exiting."
+        exit 0
+    fi
+    PATTERN="$input_pattern"
+else
+    PATTERN="$1"
 fi
-
-PATTERN="$1"
 
 echo -e "${YELLOW}Searching for files matching '${CYAN}$PATTERN${YELLOW}'...${NC}"
 echo -e "${BLUE}---------------------------------------------------${NC}"

@@ -13,12 +13,24 @@ if [ "$#" -lt 2 ]; then
     echo -e "${YELLOW}Usage: $0 <old_string> <new_string> [file_pattern]${NC}"
     echo "Example: $0 'foo' 'bar'"
     echo "Example: $0 'foo' 'bar' '*.txt'"
-    exit 1
+    echo ""
+    
+    read -p "请输入旧字符串 (Old String): " OLD_STR
+    if [ -z "$OLD_STR" ]; then exit 0; fi
+    
+    read -p "请输入新字符串 (New String): " NEW_STR
+    
+    read -p "请输入文件匹配模式 (默认 *, 回车跳过): " input_pattern
+    if [ -z "$input_pattern" ]; then
+        FILE_PATTERN="*"
+    else
+        FILE_PATTERN="$input_pattern"
+    fi
+else
+    OLD_STR="$1"
+    NEW_STR="$2"
+    FILE_PATTERN="${3:-*}"
 fi
-
-OLD_STR="$1"
-NEW_STR="$2"
-FILE_PATTERN="${3:-*}"
 
 echo -e "${BLUE}Replacing '${RED}$OLD_STR${BLUE}' with '${GREEN}$NEW_STR${BLUE}' in files matching '${CYAN}$FILE_PATTERN${BLUE}'...${NC}"
 

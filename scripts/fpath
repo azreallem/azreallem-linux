@@ -4,12 +4,19 @@
 if [ -z "$1" ]; then
     echo "Usage: $0 <filename_pattern>"
     echo "Example: $0 show.sh"
-    exit 1
+    echo ""
+    read -p "请输入文件名(支持模糊匹配): " input_pattern
+    if [ -z "$input_pattern" ]; then
+        exit 0
+    fi
+    PATTERN="$input_pattern"
+else
+    PATTERN="$1"
 fi
 
 # Find files and print their absolute paths
 # -name "*$1*" allows for partial matches; use "$1" for exact matches
-find "$PWD" -name "*$1*" 2>/dev/null | while read -r file; do
+find "$PWD" -name "*$PATTERN*" 2>/dev/null | while read -r file; do
     # readlink -f ensures we get the real canonical path
     readlink -f "$file"
 done
