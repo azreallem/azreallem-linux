@@ -1,151 +1,10 @@
-" ============================================================================
-" General Settings
-" ============================================================================
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" ============================================================================
-" Vundle Plugin Management
-" ============================================================================
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'jmcantrell/vim-diffchanges'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'antiagainst/vim-tablegen'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'Exafunction/codeium.vim'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" ============================================================================
-" UI & Behavior
-" ============================================================================
-syntax on
-set termencoding=utf-8
-set encoding=utf-8
-set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
-
-set number                  " Show line numbers
-set laststatus=2            " Always show status line
-set mouse=a                 " Enable mouse support
-set wildmenu                " Enhanced command line completion
-set backspace=indent,eol,start " Fix backspace behavior
-
-" Indentation
-set autoindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-" Search
-set incsearch               " Incremental search
-set hlsearch                " Highlight search results
-set ignorecase              " Case insensitive search
-set smartcase               " Case sensitive if capital used
-
-" Files
-set nobackup
-set noswapfile
-set noundofile
-set autoread                " Auto read when file is changed from outside
-
-" Clipboard
-" Only use unnamedplus if we are in a local GUI or have a valid X connection.
-" Otherwise, rely on our custom OSC 52 function.
-if has('gui_running') || (!empty($DISPLAY) && executable('xclip'))
-    set clipboard=unnamedplus
-else
-    set clipboard=
-endif
-
-" ============================================================================
-" Theme
-" ============================================================================
-try
-    colorscheme slate
-catch
-    colorscheme default
-endtry
-
-" Custom Highlights
-highlight Normal ctermbg=0 ctermfg=244 guibg=#000000 guifg=#808080
-highlight LineNr ctermfg=DarkGrey guifg=DarkGrey
-
-" ============================================================================
-" Plugin Configurations
-" ============================================================================
-" vim-markdown
-let g:vim_markdown_folding_disabled = 1
-
-" vim-gitgutter
-set foldtext=gitgutter#fold#foldtext()
-let g:gitgutter_use_location_list = 0
-set updatetime=100
-
-" ============================================================================
-" Custom Functions
-" ============================================================================
-
-" Tab Navigation
-function! TabLeft()
-   if tabpagenr() == 1
-      execute "tabm"
-   else
-      execute "tabm -1"
-   endif
-endfunction
-
-function! TabRight()
-   if tabpagenr() == tabpagenr('$')
-      execute "tabm" 0
-   else
-      execute "tabm +1"
-   endif
-endfunction
-
-" Git Diff
-let file_path = expand('%:p')
-function! GitDiff()
-    :silent write
-    :silent execute '!git diff'
-    :redraw!
-endfunction
-
-" Cscope Reconnect
-function! ReConnectCscope()
-    exec "cs kill 0"
-    exec "!cscope.sh"
-    exec "cs add cscope.out"
-endfunction
-
-" Clipboard Integration (OSC 52 + Xclip)
+" Clipboard Integration (Delegated to external script)
 function! CopyToTmuxAndSystem()
     let l:text = @0
+    let l:script = expand('~/scripts/yank.sh')
     
-    " 1. OSC 52 (Works over SSH/Tmux if terminal supports it)
-    " Encode text to base64 (no newlines)
-    let l:b64 = system("base64 | tr -d '\n'", l:text)
-    let l:b64 = substitute(l:b64, '\s', '', 'g')
-    
-    " Construct OSC 52 sequence using printf for robustness
-    if exists('$TMUX')
-        " Tmux wrapping: ESC P tmux ; ESC ESC ] 52 ; c ; B64 BEL ESC \
-        " We use \033 (octal) for ESC to avoid shell interpretation issues
-        call system("printf '\\033Ptmux;\\033\\033]52;c;%s\\007\\033\\\\' " . l:b64 . " > /dev/tty")
-    else
-        " Standard OSC 52: ESC ] 52 ; c ; B64 BEL
-        call system("printf '\\033]52;c;%s\\007' " . l:b64 . " > /dev/tty")
-    endif
-
-    " 2. Xclip fallback (only if local X11 is available)
-    if executable('xclip') && !empty($DISPLAY)
-        call system('xclip -selection clipboard -i 2>/dev/null', l:text)
+    if executable(l:script)
+        call system(l:script, l:text)
     endif
 endfunction
 
@@ -157,9 +16,9 @@ augroup SystemClipboard
     endif
 augroup END
 
-" ============================================================================
+" ============================================================================ 
 " Key Mappings
-" ============================================================================
+" ============================================================================ 
 let mapleader = ","
 
 " Tab Navigation
@@ -173,31 +32,4 @@ nmap <F3> :set tabstop=4<cr>:set shiftwidth=4<cr>:set expandtab<cr>
 nmap <F4> :!cscope -Rbq<cr>:cs reset<cr>:call ReConnectCscope()<cr><cr><cr>
 
 " Cscope
-nmap cf :cscope help<cr>:cs find 
-nmap tcf :cscope help<cr>:tab cs find 
-nmap <leader>cs :cs find s 
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
-
-" GitGutter
-nmap gj <Plug>(GitGutterNextHunk)
-nmap gk <Plug>(GitGutterPrevHunk)
-nmap ghs <Plug>(GitGutterStageHunk)
-nmap ghu <Plug>(GitGutterUndoHunk)
-nmap ghp <Plug>(GitGutterPreviewHunk)
-
-" Codeium
-imap <script><silent><nowait><expr> <Tab> codeium#Accept()
-imap <C-;>   codeium#CycleCompletions(1)
-imap <C-,>   codeium#CycleCompletions(-1)
-imap <C-x>   codeium#Clear()
-
-" Misc
-noremap <leader>y :call CopyToTmuxAndSystem()<CR>
-" =============================================================
+nmap cf :cscope help<cr>:cs find
