@@ -131,18 +131,17 @@ function! CopyToTmuxAndSystem()
     " 1. OSC 52 (Works over SSH/Tmux if terminal supports it)
     " Encode text to base64 (no newlines)
     let l:b64 = system("base64 | tr -d '\n'", l:text)
+    let l:b64 = substitute(l:b64, '\s', '', 'g')
     
-    " Construct OSC 52 sequence
+    " Construct OSC 52 sequence using printf for robustness
     if exists('$TMUX')
-        " Tmux wrapping: \ePtmux;\e ... \e\\
-        let l:osc52 = "\x1bPtmux;\x1b\x1b]52;c;" . l:b64 . "\x07\x1b\\"
+        " Tmux wrapping: ESC P tmux ; ESC ESC ] 52 ; c ; B64 BEL ESC \
+        " We use \033 (octal) for ESC to avoid shell interpretation issues
+        call system("printf '\\033Ptmux;\\033\\033]52;c;%s\\007\\033\\\\' " . l:b64 . " > /dev/tty")
     else
-        " Standard OSC 52
-        let l:osc52 = "\x1b]52;c;" . l:b64 . "\x07"
+        " Standard OSC 52: ESC ] 52 ; c ; B64 BEL
+        call system("printf '\\033]52;c;%s\\007' " . l:b64 . " > /dev/tty")
     endif
-
-    " Send to terminal via /dev/tty
-    call system("printf '%s' '" . l:osc52 . "' > /dev/tty")
 
     " 2. Xclip fallback (only if local X11 is available)
     if executable('xclip') && !empty($DISPLAY)
